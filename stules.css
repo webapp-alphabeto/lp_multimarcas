@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Futura';
+    src: url('./fonts/futura.woff2') format('woff2'),
+         url('./fonts/futura.woff') format('woff'),
+         url('./fonts/futura.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Reset básico */
 * {
     margin: 0;
@@ -5,17 +14,32 @@
     box-sizing: border-box;
 }
 
+/* Estilos gerais */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+
+.header {
+    background-color: #ffffff;
+    padding: 10px 0; /* Aumenta o espaçamento vertical dentro do header */
+    margin: 20px;
+}
+
 /* Inicio css do Header */
 .container-header {
     background-color: #ffffff;
-    padding: 2px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0px 0;
     display: flex; /* Garante o layout flexível */
     flex-direction: row; /* Coloca os itens lado a lado */
     align-items: center; /* Alinha verticalmente ao centro */
     justify-content: space-between; /* Garante que os elementos tenham espaço entre eles */
     position: relative; /* Necessário para usar o centramento absoluto no logo */
-    border: 1px solid black;
+    min-height: 40px;
 }
 
 .logo-header {
@@ -25,7 +49,7 @@
 }
 
 
-.navbar, .navbar2 {
+.navbar {
     display: flex;
     align-items: center; /* Garante que os itens estejam centralizados verticalmente */
 }
@@ -33,7 +57,6 @@
 
 .navbar nav {
     display: flex; /* Garante que os links fiquem em linha */
-    border: 1px solid black;
 }
 
 .nav-links {
@@ -45,9 +68,17 @@
 }
 
 .nav-links li a {
+    font-family: 'Poppins', 'Quicksand', 'Futura',  Arial, sans-serif; /* Usa Futura e fontes alternativas */
+    font-size: 1rem; /* Ajuste o tamanho da fonte conforme necessário */
+    font-weight: bold; /* Caso precise de um estilo negrito */
     text-decoration: none; /* Remove o sublinhado dos links */
     color: #333; /* Define a cor dos links */
     font-weight: 500; /* Estilo da fonte */
+}
+
+
+.nav-links li a:hover {
+    color: #ff6600; /* Altere a cor ao passar o mouse */
 }
  
 
@@ -57,38 +88,24 @@
     color: #333;
     text-decoration: none;
     align-items: center;
-    border: 1px solid black;
 }
 
 .logoalpha {
     width: 200px;
     height: auto; /* Garante proporção */
-    border: 1px solid #ddd; /* Adiciona uma borda para visualização */
-    border-radius: 5px; /* Cantos arredondados */
-    border: 1px solid black;
 }
 
-.navbar2 {
-    display: flex;
-    flex-direction: row;
-    border: 1px solid black;
-} 
+.nav-links i {
+    color: #ff6600; /* Cor do ícone */
+    font-size: 1.2rem; /* Tamanho do ícone */
+}
 
 /* Fim css header */
 
 
+
+
 /* Inicio css section forms */
-
-
-/* Estilos gerais */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-}
-
 h2 {
     font-size: 1.8rem;
     color: #ffffff;
@@ -141,40 +158,111 @@ button:hover {
 /* Estilo da seção do formulário */
 .form-section {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 50px;
     background-color: #ff6600;
     color: #ffffff;
+    padding: 50px;
+    height: 100vh; /* Para cobrir toda a altura */
 }
 
 .form-container {
     display: flex;
+    width: 90%;
     max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
+    height: 100%;
 }
 
-.form-image {
-    flex: 1;
-    max-width: 50%;
+.carousel-container {
+    flex: 0 0 55%; /* 55% da largura */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel img {
+    width: 100%; /* A largura ocupa 100% da div */
+    height: 100%; /* A altura ocupa 100% da div */
+    object-fit: cover; /* A imagem cobre a área, cortando o excesso */
+    border-radius: 0; /* Remova bordas arredondadas, se existirem */
+}
+
+
+.carousel-controls {
+    position: absolute;
+    bottom: 10px; /* Alinha as setas ao final da imagem */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px; /* Adiciona espaço lateral entre as setas e as bordas */
+    box-sizing: border-box; /* Garante que o padding não afete o layout */
+}
+
+.carousel-controls button {
+    background-color: rgba(255, 255, 255, 0.0);
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.carousel-controls button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.carousel-controls i {
+    font-size: 24px; /* Tamanho do ícone */
+    color: white; /* Cor branca para o ícone */
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 10px;
 }
 
-.form-image img {
-    max-width: 100%;
-    border-radius: 10px;
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.indicator.active {
+    background-color: #fff;
 }
 
 .form-content {
-    flex: 1;
-    max-width: 50%;
-    padding: 20px;
+    flex: 0 0 45%; /* 45% da largura */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.form {
+.form-content h2 {
+    margin-bottom: 20px;
+}
+
+.form-content form {
     display: flex;
     flex-direction: column;
 }
@@ -192,6 +280,9 @@ button:hover {
 .submit-btn:hover {
     background-color: #ff8800;
 }
+
+
+/* Fim do css do section forms */
 
 
 

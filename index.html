@@ -6,6 +6,10 @@
     <title>Atacado - Alphabeto</title>
     <link rel="stylesheet" href="./stules.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
     <header class="header">
@@ -13,11 +17,11 @@
             <div class="navbar">
                 <nav>
                     <ul class="nav-links">
-                        <li><a href="#about">Vestidos</a></li>
-                        <li><a href="#services">Meninas</a></li>
-                        <li><a href="#boys">Meninos</a></li>
-                        <li><a href="#launch">Lançamento</a></li>
-                        <li><a href="#launch">customização</a></li>
+                        <li><a href="https://www.alphabeto.com/infantil/vestidos?page=1">Vestidos</a></li>
+                        <li><a href="https://www.alphabeto.com/infantil/crianca/menina?page=1">Meninas</a></li>
+                        <li><a href="https://www.alphabeto.com/infantil/crianca/menino?page=1">Meninos</a></li>
+                        <li><a href="https://www.alphabeto.com/infantil/novidades?page=1">Novidades</a></li>
+                        <!-- <li><a href="#launch">customização</a></li> -->
                     </ul>
                 </nav>
             </div>
@@ -26,9 +30,18 @@
                 <img src="./img/logoalphabeto.png" alt="logo" class="logoalpha">
             </div>
     
-            <div class="navbar2">
-                <a href="#login">Entrar</a> |
-                <a href="#signup">Cadastro</a>
+            <div class="navbar">
+                <nav>
+                    <ul class="nav-links">
+                        <li><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="#ff6600">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg></li>
+                        <li><a href="https://www.alphabeto.com/login">Entrar</a> | </li>
+                        <li><a href="https://www.alphabeto.com/login">Cadastro</a></li>
+                    </ul>
+                </nav>              
+                
             </div>
         </div>
     </header>
@@ -38,43 +51,59 @@
 
     <section class="form-section">
         <div class="form-container">
-            <div class="form-image">
-                <img src="./img/children-image.png" alt="Crianças brincando" />
+            <!-- Parte do Carrossel -->
+            <div class="carousel-container">
+                <div class="carousel">
+                    <img src="./img/banner-teste1.png" alt="Imagem 1">
+                    <img src="./img/banner-teste2.png" alt="Imagem 2">
+                    <img src="./img/banner-teste3.png" alt="Imagem 3">
+                </div>
+                <div class="carousel-controls">
+                    <button class="prev" title="Imagem anterior">
+                        <i class="fa-solid fa-caret-left"></i>
+                    </button>
+                    <button class="next" title="Próxima imagem">
+                        <i class="fa-solid fa-caret-right"></i>
+                    </button>
+                </div>
+                <div class="carousel-indicators">
+                    <span class="indicator active"></span>
+                    <span class="indicator"></span>
+                    <span class="indicator"></span>
+                </div>
             </div>
+            
+    
+            <!-- Parte do Formulário -->
             <div class="form-content">
                 <h2>Leve a magia da Alphabeto para sua loja e encante seus clientes!</h2>
                 <form action="#" method="POST" class="form">
                     <label for="name">Nome *</label>
                     <input type="text" id="name" name="name" required>
-    
                     <label for="email">E-mail *</label>
                     <input type="email" id="email" name="email" required>
-    
                     <label for="phone">Celular *</label>
                     <input type="tel" id="phone" name="phone" required>
-    
                     <label for="instagram">Instagram da sua loja *</label>
                     <input type="text" id="instagram" name="instagram" placeholder="@" required>
-    
                     <label for="uf">UF *</label>
                     <input type="text" id="uf" name="uf" required>
-    
                     <label for="city">Cidade que fica a sua loja física *</label>
                     <input type="text" id="city" name="city" required>
-    
                     <label for="cnpj">Qual seu CNPJ *</label>
                     <input type="text" id="cnpj" name="cnpj" required>
-    
                     <div class="checkbox-container">
                         <input type="checkbox" id="consent" name="consent">
                         <label for="consent">Concorda em receber comunicações da Alphabeto sobre serviços acima.</label>
                     </div>
-    
                     <button type="submit" class="submit-btn">Enviar</button>
                 </form>
             </div>
         </div>
     </section>
+
+    <!-- Fim Section forms -->
+    
     
 
     <section class="hero">
