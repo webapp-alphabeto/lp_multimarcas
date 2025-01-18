@@ -9,22 +9,73 @@
 </head>
 <body>
     <header class="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">Alphabeto</a>
-                <ul class="nav-links">
-                    <li><a href="#about">Vestidos</a></li>
-                    <li><a href="#services">Meninas</a></li>
-                    <li><a href="#boys">Meninos</a></li>
-                    <li><a href="#launch">Lançamento</a></li>
-                </ul>
-                <div class="auth-links">
-                    <a href="#login">Entrar</a> |
-                    <a href="#signup">Cadastro</a>
-                </div>
-            </nav>
+        <div class="container-header">
+            <div class="navbar">
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#about">Vestidos</a></li>
+                        <li><a href="#services">Meninas</a></li>
+                        <li><a href="#boys">Meninos</a></li>
+                        <li><a href="#launch">Lançamento</a></li>
+                        <li><a href="#launch">customização</a></li>
+                    </ul>
+                </nav>
+            </div>
+    
+            <div class="logo-header">
+                <img src="./img/logoalphabeto.png" alt="logo" class="logoalpha">
+            </div>
+    
+            <div class="navbar2">
+                <a href="#login">Entrar</a> |
+                <a href="#signup">Cadastro</a>
+            </div>
         </div>
     </header>
+
+
+    <!-- Inicio Section forms -->
+
+    <section class="form-section">
+        <div class="form-container">
+            <div class="form-image">
+                <img src="./img/children-image.png" alt="Crianças brincando" />
+            </div>
+            <div class="form-content">
+                <h2>Leve a magia da Alphabeto para sua loja e encante seus clientes!</h2>
+                <form action="#" method="POST" class="form">
+                    <label for="name">Nome *</label>
+                    <input type="text" id="name" name="name" required>
+    
+                    <label for="email">E-mail *</label>
+                    <input type="email" id="email" name="email" required>
+    
+                    <label for="phone">Celular *</label>
+                    <input type="tel" id="phone" name="phone" required>
+    
+                    <label for="instagram">Instagram da sua loja *</label>
+                    <input type="text" id="instagram" name="instagram" placeholder="@" required>
+    
+                    <label for="uf">UF *</label>
+                    <input type="text" id="uf" name="uf" required>
+    
+                    <label for="city">Cidade que fica a sua loja física *</label>
+                    <input type="text" id="city" name="city" required>
+    
+                    <label for="cnpj">Qual seu CNPJ *</label>
+                    <input type="text" id="cnpj" name="cnpj" required>
+    
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="consent" name="consent">
+                        <label for="consent">Concorda em receber comunicações da Alphabeto sobre serviços acima.</label>
+                    </div>
+    
+                    <button type="submit" class="submit-btn">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
 
     <section class="hero">
         <div class="container">
