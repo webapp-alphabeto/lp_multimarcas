@@ -111,42 +111,6 @@ body, html {
 
 /* Inicio css section forms */
 
-label {
-    display: block;
-    /* margin-bottom: 5px; */
-    font-size: 0.9rem;
-    color: #ffffff;
-}
-
-
-
-button {
-    background-color: #ffcc00;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    color: #ffffff;
-    text-transform: uppercase;
-}
-
-button:hover {
-    background-color: #ffaa00;
-}
-
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    /* margin-bottom: 15px; */
-}
-
-.checkbox-container label {
-    margin-left: 0px;
-}
-
-/* Estilo da seção do formulário */
 /* Ajusta o container principal */
 .form-section {
     display: flex;
@@ -159,14 +123,7 @@ button:hover {
     width: 100vw; /* Largura total da janela */
 }
 
-/* Garante que o form-container ocupe toda a largura */
-.form-container {
-    display: flex;
-    width: 100%; /* Largura total */
-    max-width: 100%; /* Remove limite de largura */
-    height: 100%;
-}
-
+/* Ajustes do Carrosel */
 .carousel-container {
     flex: 0 0 55%; /* 55% da largura */
     display: flex;
@@ -243,7 +200,26 @@ button:hover {
 .indicator.active {
     background-color: #fff;
 }
+/* fim do carrosel */
 
+/* Ajusta o Formulario */
+/* Garante que o form-container ocupe toda a largura */
+.form-container {
+    display: flex;
+    width: 100%; /* Largura total */
+    max-width: 100%; /* Remove limite de largura */
+    height: 100%;
+}
+
+.form-content {
+    flex: 0 0 45%; /* 45% da largura */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Titulo do Formulario */
 .titulo-forms {
     display: flex;
     flex-direction: row; /* Organiza os elementos em linha (lado a lado) */
@@ -258,8 +234,6 @@ button:hover {
     margin-bottom: 20px; /* Espaço abaixo do título */
     position: relative; /* Para alinhar elementos decorativos */
 }
-
-
 
 .titulo-forms .destaque {
     color: #FFD700; /* Cor amarela para a palavra em destaque */
@@ -282,27 +256,16 @@ button:hover {
     margin-top: -5px; /* Ajuste este valor conforme necessário */
 }
 
-
-
 .titulo-img img {
-    width: 80px; /* Defina a largura desejada */
+    width: 90px; /* Defina a largura desejada */
     height: auto; /* Mantém a proporção da imagem */
     justify-content: space-between;
 }
 
-
-.form-content {
-    flex: 0 0 45%; /* 45% da largura */
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* css do formulario */
+/* o Formulario */
 .formulario {
     padding: 20px;
-    margin-right: 15px;
+    margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
 }
@@ -316,28 +279,160 @@ button:hover {
     font-size: 1rem;
 }
 
+.formulario label {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
 .form-content form {
     display: flex;
     flex-direction: column;
 }
 
-.submit-btn {
-    background-color: #ffaa00;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
+.form-footer {
+    display: flex; /* Ativa o Flexbox */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: flex-start; /* Alinha os itens à esquerda */
+    margin-top: 20px; /* Adiciona espaço acima do contêiner */
+    width: 100%; /* Garante que o contêiner ocupe toda a largura */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Alinha o checkbox com o texto */
+    margin-bottom: 20px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 20px; /* Define a largura do checkbox */
+    height: 20px; /* Define a altura do checkbox */
+    margin-right: 10px; /* Espaço entre o checkbox e o texto */
+    appearance: none; /* Remove o estilo padrão do navegador */
+    border: 2px solid #fff; /* Borda branca */
+    background-color: #ffffff; /* Fundo transparente */
     cursor: pointer;
-    font-size: 1rem;
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+    background-color: #FFD700; /* Fundo amarelo quando marcado */
+    border-color: #FFD700; /* Borda amarela quando marcado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-container input[type="checkbox"]:checked::after {
+    content: '✔'; /* Adiciona o símbolo de check */
+    color: #fff; /* Cor do símbolo de check */
+    font-size: 14px;
+    display: block;
+    text-align: center;
+}
+
+.button-container {
+    width: 100%; /* Ocupa toda a largura */
+    display: flex; /* Flexbox para controle */
+    justify-content: flex-end; /* Alinha o botão à esquerda */
+}
+
+.submit-btn {
+    background-color: #FFD700; /* Fundo amarelo */
+    color: #FF6600; /* Texto laranja */
+    border: none; /* Remove borda */
+    padding: 10px 40px; /* Espaçamento interno */
+    border-radius: 30px; /* Deixa o botão arredondado */
+    font-size: 1.2rem; /* Aumenta o tamanho do texto */
+    font-weight: bold; /* Negrito */
+    text-transform: lowercase; /* Deixa o texto em minúsculas */
+    cursor: pointer; /* Mostra o ponteiro ao passar o mouse */
+    transition: all 0.3s ease; /* Transição suave */
+    width: auto; /* Adapta-se ao conteúdo */
+    max-width: 200px; /* Define um limite máximo para o tamanho do botão */
 }
 
 .submit-btn:hover {
-    background-color: #ff8800;
+    background-color: #FFAA00; /* Fundo mais escuro no hover */
+    color: #fff; /* Texto branco no hover */
 }
-
 
 /* Fim do css do section forms */
 
+
+/* Inicio Section Passos */
+
+/* Estilo Geral da Section */
+.passos {
+    background-color: #ffffff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.passos-header h2 {
+    font-family: 'Coiny', sans-serif;
+    font-size: 2rem;
+    color: #FF6600;
+    margin-bottom: 30px;
+}
+
+.passos-header .destaque {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+/* Conteúdo dos Passos */
+.passos-conteudo {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap; /* Para ajustar em telas menores */
+}
+
+.passo {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1;
+    max-width: 300px;
+    text-align: center;
+    position: relative;
+}
+
+.icone-passo img {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 60px;
+    height: auto;
+}
+
+.conteudo-passo h3 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    background-color: #FF6600;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+}
+
+.passo:nth-child(2) h3 {
+    background-color: #A064DB;
+}
+
+.passo:nth-child(3) h3 {
+    background-color: #00B2CC;
+}
+
+.conteudo-passo p {
+    font-family: 'Coiny', sans-serif;
+    font-size: 1rem;
+    color: #444444;
+}
+
+
+/* Fim Section Passos */
 
 
 
