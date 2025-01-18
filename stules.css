@@ -361,17 +361,25 @@ body, html {
 /* Inicio Section Passos */
 
 /* Estilo Geral da Section */
+/* Garantindo que a seção "passos" tenha posição relativa */
 .passos {
-    background-color: #ffffff;
-    padding: 50px 20px;
-    text-align: center;
+    position: relative; /* Necessário para que o `position: absolute` funcione corretamente */
+    overflow: hidden; /* Evita que partes das imagens saiam da área visível */
+    background-color: #fff; /* Fundo branco */
+    padding: 50px 20px; /* Espaçamento interno */
+    text-align: center; /* Centraliza o texto */
+}
+
+.logoalpha-passos {
+    width: 300px;
+    height: auto; /* Garante proporção */
 }
 
 .passos-header h2 {
     font-family: 'Coiny', sans-serif;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #FF6600;
-    margin-bottom: 30px;
+    margin-bottom: 80px;
 }
 
 .passos-header .destaque {
@@ -385,54 +393,187 @@ body, html {
     justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap; /* Para ajustar em telas menores */
+    margin-left: 140px;
+    margin-right: 140px;
 }
 
-.passo {
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+.passo1, .passo2, .passo3 {
+    border-radius: 110px;
+    padding: 30px;
     flex: 1;
     max-width: 300px;
     text-align: center;
     position: relative;
 }
 
+.passo1 {
+    background-color: #FF6600;
+}
+
+
+.passo2 {
+    background-color: #A064DB;
+ }
+
+
+.passo3 {
+    background-color: #00B2CC;
+}
+
 .icone-passo img {
     position: absolute;
-    top: -30px;
-    left: -30px;
-    width: 60px;
+    top: -80px;
+    left: -50px;
+    width: 180px;
     height: auto;
 }
 
 .conteudo-passo h3 {
-    font-size: 2.5rem;
+    font-family: 'Coiny', sans-serif;
+    font-size: 3.5rem;
     color: #ffffff;
-    background-color: #FF6600;
-    width: 50px;
-    height: 50px;
     line-height: 50px;
     border-radius: 50%;
     margin: 0 auto 10px auto;
 }
 
-.passo:nth-child(2) h3 {
-    background-color: #A064DB;
-}
-
-.passo:nth-child(3) h3 {
-    background-color: #00B2CC;
-}
 
 .conteudo-passo p {
-    font-family: 'Coiny', sans-serif;
-    font-size: 1rem;
-    color: #444444;
+    font-family: 'Inter', sans-serif;
+    font-size: 25px;
+    color: #ffffff;
 }
+
+.conteudo-passo .destaquepassos {
+    font-family: 'Coiny', sans-serif;
+    letter-spacing: 1px;
+}
+
+
+/* Estilo das estrelas */
+.estrelas-esquerda, .estrelas-direita {
+    position: absolute;
+
+    width: 100px; /* Tamanho ajustável */
+    height: auto; /* Mantém a proporção da imagem */
+    z-index: 1; /* Certifica-se de que as imagens fiquem atrás do conteúdo */
+}
+
+.estrelas-esquerda {
+    left: -0px; /* Ajuste de distância para fora da seção */
+    margin-left: 20px;
+    bottom: 0;
+}
+
+.estrelas-direita {
+    right: -0px; /* Ajuste de distância para fora da seção */
+    transform: scaleX(-1); /* Espelha a imagem horizontalmente */
+    margin-right: 20px;
+    top: 130px;
+}
+
 
 
 /* Fim Section Passos */
+
+
+
+/* Curva de divisao de Section */
+.curva {
+    width: 100%;
+    height: auto;
+    overflow: hidden; /* Garante que o SVG não extrapole */
+    line-height: 0; /* Remove espaçamento extra */
+}
+
+.curva svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+
+/* Fim da divisao de Section */
+
+
+/* Inicio da Section Vantagens */
+
+/* Estilo da Seção */
+.vantagens {
+    background-color: #FFD700; /* Fundo amarelo */
+    padding: 50px 20px;
+}
+
+.vantagens-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.vantagens-header h2 {
+    font-family: 'Coiny', sans-serif; /* Fonte Coiny */
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FF6600;
+}
+
+.vantagens-header h2 span {
+    color: #FF4400; /* Destaque para a palavra VANTAGENS */
+}
+
+/* Conteúdo */
+.vantagens-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsivo */
+    gap: 20px; /* Espaço entre os itens */
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o container */
+}
+
+/* Itens */
+.vantagem-item {
+    background-color: #FFEE93; /* Fundo mais claro */
+    border-radius: 15px; /* Cantos arredondados */
+    border: 2px dashed #ffffff; /* Borda tracejada */
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+.vantagem-item img {
+    width: 50px; /* Tamanho dos ícones */
+    height: auto; /* Proporção correta */
+    margin-bottom: 15px; /* Espaço abaixo do ícone */
+}
+
+.vantagem-item h3 {
+    font-family: 'Inter', sans-serif; /* Fonte Inter */
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FF6600; /* Cor laranja */
+    margin-bottom: 10px;
+}
+
+.vantagem-item h3 span {
+    color: #FF4400; /* Destaque em vermelho */
+}
+
+.vantagem-item p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #FF6600;
+    line-height: 1.5;
+}
+
+/* Fim da Section Vantagens */
+
+
+
+
+
+
+
+
 
 
 
