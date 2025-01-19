@@ -1,3 +1,4 @@
+/* Fontes  */
 @font-face {
     font-family: 'Futura';
     src: url('./fonts/futura.woff2') format('woff2'),
@@ -17,17 +18,16 @@
 /* Estilos gerais */
 body, html {
     font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow-x: hidden; /* Remove a rolagem horizontal */
     box-sizing: border-box; /* Inclui paddings e bordas na largura */
-    
 }
 
-
+/* Inicio do Css para o Header */
 .header {
     background-color: #ffffff;
     padding: 10px 0; /* Aumenta o espaçamento vertical dentro do header */
@@ -52,12 +52,10 @@ body, html {
     transform: translateX(-50%); /* Corrige o alinhamento central */
 }
 
-
 .navbar {
     display: flex;
     align-items: center; /* Garante que os itens estejam centralizados verticalmente */
 }
-
 
 .navbar nav {
     display: flex; /* Garante que os links fiquem em linha */
@@ -80,12 +78,10 @@ body, html {
     font-weight: 500; /* Estilo da fonte */
 }
 
-
 .nav-links li a:hover {
-    color: #ff6600; /* Altere a cor ao passar o mouse */
+    color: #ff8300; /* Altere a cor ao passar o mouse */
 }
  
-
 .logo-header {
     font-size: 1.5rem;
     font-weight: 700;
@@ -100,23 +96,18 @@ body, html {
 }
 
 .nav-links i {
-    color: #ff6600; /* Cor do ícone */
+    color: #ff8300; /* Cor do ícone */
     font-size: 1.2rem; /* Tamanho do ícone */
 }
-
 /* Fim css header */
 
-
-
-
 /* Inicio css section forms */
-
 /* Ajusta o container principal */
 .form-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ff6600;
+    background-color: #ff8300;
     color: #ffffff;
     padding: 0; /* Remove o padding interno */
     height: 100vh; /* Altura total da janela */
@@ -148,7 +139,6 @@ body, html {
     object-fit: cover; /* A imagem cobre a área, cortando o excesso */
     border-radius: 0; /* Remova bordas arredondadas, se existirem */
 }
-
 
 .carousel-controls {
     position: absolute;
@@ -229,10 +219,11 @@ body, html {
     text-align: center; /* Centraliza o texto */
     color: #fff; /* Define a cor do texto principal */
     font-family: 'Coiny', sans-serif; /* Aplica a fonte Coiny */
-    font-size: 2rem; /* Tamanho da fonte geral */
-    line-height: 1.5; /* Altura da linha para dar espaço ao texto */
+    font-size: 30px; /* Tamanho da fonte geral */
+    line-height: 1; /* Altura da linha para dar espaço ao texto */
     margin-bottom: 20px; /* Espaço abaixo do título */
     position: relative; /* Para alinhar elementos decorativos */
+    margin-left: 85px;
 }
 
 .titulo-forms .destaque {
@@ -257,14 +248,15 @@ body, html {
 }
 
 .titulo-img img {
-    width: 90px; /* Defina a largura desejada */
+    width: 70px; /* Defina a largura desejada */
     height: auto; /* Mantém a proporção da imagem */
     justify-content: space-between;
+    margin-right: 5px;
 }
 
 /* o Formulario */
 .formulario {
-    padding: 20px;
+    padding: 10px;
     margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -272,16 +264,15 @@ body, html {
 
 .formulario input, textarea {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 5px;
+    margin-bottom: 5px;
     border: 1px solid #ddd;
-    /* border-radius: 5px; */
     font-size: 1rem;
 }
 
 .formulario label {
     font-size: 1rem;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .form-content form {
@@ -301,6 +292,10 @@ body, html {
     display: flex;
     align-items: center; /* Alinha o checkbox com o texto */
     margin-bottom: 20px;
+}
+
+.checkbox-container label {
+    font-size: 13px; /* Tamanho do texto do checkbox */
 }
 
 .checkbox-container input[type="checkbox"] {
@@ -354,14 +349,10 @@ body, html {
     background-color: #FFAA00; /* Fundo mais escuro no hover */
     color: #fff; /* Texto branco no hover */
 }
-
 /* Fim do css do section forms */
 
-
 /* Inicio Section Passos */
-
 /* Estilo Geral da Section */
-/* Garantindo que a seção "passos" tenha posição relativa */
 .passos {
     position: relative; /* Necessário para que o `position: absolute` funcione corretamente */
     overflow: hidden; /* Evita que partes das imagens saiam da área visível */
