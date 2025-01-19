@@ -1,4 +1,4 @@
-/* Fontes  */
+/* ------------ Fontes ------------------------------------------------------------------- */
 @font-face {
     font-family: 'Futura';
     src: url('./fonts/futura.woff2') format('woff2'),
@@ -8,14 +8,13 @@
     font-style: normal;
 }
 
-/* Reset básico */
+/* ------------ Reset básico ----------------------------------------------------------- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilos gerais */
 body, html {
     font-family: 'Arial', sans-serif;
     background-color: #ffffff;
@@ -27,14 +26,13 @@ body, html {
     box-sizing: border-box; /* Inclui paddings e bordas na largura */
 }
 
-/* Inicio do Css para o Header */
+/* ------------ Inicio do Css para o Header --------------------------------------------- */
 .header {
     background-color: #ffffff;
     padding: 10px 0; /* Aumenta o espaçamento vertical dentro do header */
     margin: 20px;
 }
 
-/* Inicio css do Header */
 .container-header {
     background-color: #ffffff;
     padding: 0px 0;
@@ -99,9 +97,9 @@ body, html {
     color: #ff8300; /* Cor do ícone */
     font-size: 1.2rem; /* Tamanho do ícone */
 }
-/* Fim css header */
+/*------------  Fim css header------------------------------------------------------- */
 
-/* Inicio css section forms */
+/*------------  Inicio css section forms ------------------------------------------- */
 /* Ajusta o container principal */
 .form-section {
     display: flex;
@@ -190,7 +188,6 @@ body, html {
 .indicator.active {
     background-color: #fff;
 }
-/* fim do carrosel */
 
 /* Ajusta o Formulario */
 /* Garante que o form-container ocupe toda a largura */
@@ -209,7 +206,6 @@ body, html {
     justify-content: center;
 }
 
-/* Titulo do Formulario */
 .titulo-forms {
     display: flex;
     flex-direction: row; /* Organiza os elementos em linha (lado a lado) */
@@ -349,9 +345,9 @@ body, html {
     background-color: #FFAA00; /* Fundo mais escuro no hover */
     color: #fff; /* Texto branco no hover */
 }
-/* Fim do css do section forms */
+/* ------------  Fim do css do section forms ------------------------------------------ */
 
-/* Inicio Section Passos */
+/* ------------ Inicio Section Passos ------------------------------------------------- */
 /* Estilo Geral da Section */
 .passos {
     position: relative; /* Necessário para que o `position: absolute` funcione corretamente */
@@ -361,21 +357,25 @@ body, html {
     text-align: center; /* Centraliza o texto */
 }
 
+.passos-header {
+    display: flex; /* Habilita o Flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    gap: 10px; /* Espaçamento entre texto e imagem */
+    flex-wrap: wrap; /* Ajusta o conteúdo em telas menores */
+    margin-bottom: 100px;
+}
+
 .logoalpha-passos {
     width: 300px;
     height: auto; /* Garante proporção */
+    margin-bottom: 25px;
 }
 
 .passos-header h2 {
     font-family: 'Coiny', sans-serif;
     font-size: 2.5rem;
-    color: #FF6600;
-    margin-bottom: 80px;
-}
-
-.passos-header .destaque {
-    color: #FFD700;
-    font-weight: bold;
+    color: #FF8300;
 }
 
 /* Conteúdo dos Passos */
@@ -395,21 +395,12 @@ body, html {
     max-width: 300px;
     text-align: center;
     position: relative;
+    margin: 10px;
 }
 
-.passo1 {
-    background-color: #FF6600;
-}
-
-
-.passo2 {
-    background-color: #A064DB;
- }
-
-
-.passo3 {
-    background-color: #00B2CC;
-}
+.passo1 { background-color: #FF8300; }
+.passo2 { background-color: #C26CD3; }
+.passo3 { background-color: #1EC2D7; }
 
 .icone-passo img {
     position: absolute;
@@ -426,20 +417,20 @@ body, html {
     line-height: 50px;
     border-radius: 50%;
     margin: 0 auto 10px auto;
+    margin-bottom: 10px;
 }
-
 
 .conteudo-passo p {
     font-family: 'Inter', sans-serif;
     font-size: 25px;
     color: #ffffff;
+    line-height: 1.2; /* Ajuste o valor para diminuir o espaçamento */
 }
 
 .conteudo-passo .destaquepassos {
     font-family: 'Coiny', sans-serif;
     letter-spacing: 1px;
 }
-
 
 /* Estilo das estrelas */
 .estrelas-esquerda, .estrelas-direita {
@@ -462,36 +453,30 @@ body, html {
     margin-right: 20px;
     top: 130px;
 }
+/* ------------ Fim Section Passos ------------------------------------------------------ */
 
-
-
-/* Fim Section Passos */
-
-
-
-/* Curva de divisao de Section */
-.curva {
+/* ------------ Curva de divisao de Section -------------------------------------------- */
+.curva-passos-vantagens {
+    margin-top: 20px;
+    margin-bottom: -200px;
     width: 100%;
     height: auto;
     overflow: hidden; /* Garante que o SVG não extrapole */
     line-height: 0; /* Remove espaçamento extra */
 }
 
-.curva svg {
+.curva-passos-vantagens svg {
     display: block;
     width: 100%;
     height: auto;
 }
+/* ------------ Fim da divisao de Section --------------------------------------------- */
 
-
-/* Fim da divisao de Section */
-
-
-/* Inicio da Section Vantagens */
+/* ------------ Inicio da Section Vantagens ------------------------------------------ */
 
 /* Estilo da Seção */
 .vantagens {
-    background-color: #FFD700; /* Fundo amarelo */
+    background-color: #FFD509; /* Fundo amarelo */
     padding: 50px 20px;
 }
 
@@ -507,8 +492,6 @@ body, html {
     color: #FF8300;
 }
 
-
-
 /* Conteúdo */
 .vantagens-container {
     display: grid;
@@ -518,17 +501,14 @@ body, html {
     margin: 0 auto; /* Centraliza o container */
 }
 
-
-/* Itens */
 /* Estilo dos Itens */
 .vantagem-item {
     border-radius: 15px; /* Cantos arredondados */
-    border: 2px dashed #ffffff; /* Borda tracejada */
+    border: 3px dashed #ffffff; /* Borda tracejada */
     display: flex; /* Ativa o Flexbox */
     align-items: center; /* Alinha verticalmente ícones e texto */
     gap: 20px; /* Espaço entre o ícone e o texto */
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra leve */
     text-align: left; /* Alinha o texto à esquerda */
 }
 
@@ -540,36 +520,36 @@ body, html {
 }
 
 /* Estilo do Texto */
-.vantagem-item h3,
-.vantagem-item p {
+.vantagem-item h3, .vantagem-item p {
     margin: 0;
+    line-height: 1;
 }
 
 .vantagem-item h3 {
-    font-family: 'Inter', sans-serif; /* Fonte Inter */
-    font-size: 1.2rem;
+    font-family: 'Coiny', sans-serif; /* Fonte Inter */
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #FF6600; /* Cor laranja */
+    color: #FF8300; /* Cor laranja */
     margin-bottom: 5px;
-}
-
-.vantagem-item h3 span {
-    color: #FF6600; /* Destaque em vermelho */
 }
 
 .vantagem-item p {
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    color: #FF6600;
+    font-size: 1.1rem;
+    color: #FF8300;
     line-height: 1.5;
 }
 
-/* Fim da Section Vantagens */
+.texto-container-titulo {
+    font-size: 1.6rem;
+}
 
+.texto-container-titulo-red {
+    font-size: 1rem;
+}
+/* ------------ Fim da Section Vantagens ------------------------------------------ */
 
-/* Inicio da transicao de section */
-
+/* ------------ Inicio da transicao de section ------------------------------------ */
 .section-yellow {
     background-color: #FFD700; /* Fundo amarelo */
     height: 300px; /* Altura da seção */
@@ -577,15 +557,15 @@ body, html {
     z-index: 1; /* Certifica que fique acima de outros elementos */
 }
 
-.wave-transition {
+.transition-vantagens-alphabeto {
     position: relative;
     width: 100%;
     height: auto;
-    background-color: #FFD700 /* Adiciona fundo amarelo por trás da curva */
+    background-color: #FFD700; /* Adiciona fundo amarelo por trás da curva */
     line-height: 0; /* Remove espaços adicionais */
 }
 
-.wave-transition svg {
+.transition-vantagens-alphabeto svg {
     display: block;
     width: 100%; /* Ocupa toda a largura */
     height: auto; /* Ajusta proporcionalmente */
@@ -594,19 +574,16 @@ body, html {
 }
 
 .section-orange {
-    background-color: #FF6600; /* Fundo laranja */
+    background-color: #FF8300; /* Fundo laranja */
     height: 300px; /* Altura da seção */
     position: relative;
     z-index: 1; /* Certifica que fique abaixo da curva */
 }
+/* ------------ Fim da Transicao de Section --------------------------------------- */
 
-/* Fim da Transicao de Section */
-
-/* Inicio da Section Alphabeto */
-
-
+/* ------------ Inicio da Section Alphabeto --------------------------------------- */
 .alphabeto {
-    background-color: #FF6600; /* Fundo laranja */
+    background-color: #FF8300; /* Fundo laranja */
     color: #FFFFFF; /* Texto branco */
     text-align: center;
     padding: 50px 20px;
@@ -616,6 +593,11 @@ body, html {
     font-family: 'Coiny', sans-serif;
     font-size: 3rem;
     margin-bottom: 40px;
+}
+
+.section-title {
+    margin-left: 10px;
+    margin-right: 40px;
 }
 
 .alphabeto-header   {
@@ -650,15 +632,20 @@ body, html {
 .alphabeto-item h3 {
     font-family: 'Coiny', sans-serif;
     font-size: 2.5rem;
-    color: #FFD700; /* Destaque amarelo */
+    color: #FFD509; /* Destaque amarelo */
     margin: 0;
+    line-height: 1.2;
 }
 
-/* Fim da Section Alphabeto */
+.alphabeto-item-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-style: bold;
+    line-height: 1.5;
+}
+/* ------------ Fim da Section Alphabeto --------------------------------------------- */
 
-
-/* Inicio da Transicao com a Section Mapa */
-
+/* ------------ Inicio da Transicao com a Section Mapa ------------------------------- */
 .section-orange {
     background-color: #ffffff; /* Fundo laranja */
     height: 300px; /* Altura da seção */
@@ -671,7 +658,7 @@ body, html {
     width: 100%;
     height: auto;
     line-height: 0;
-    background-color: #FF6600; /* Fundo laranja */
+    background-color: #FF8300; /* Fundo laranja */
 }
 
 .wave-transition-inverted svg {
@@ -686,13 +673,10 @@ body, html {
     position: relative;
     z-index: 1;
 }
+/* ------------ Fim da Transicao com a Section Mapa ----------------------------------- */
 
 
-/* Fim da Transicao com a Section Mapa */
-
-
-/* Inicio da Section Mapa */
-
+/* ------------ Inicio da Section Mapa ------------------------------------------------ */
 .mapa {
     background-color: #FFFFFF; /* Fundo branco */
     text-align: center;
@@ -702,12 +686,16 @@ body, html {
 
 .mapa-title {
     font-family: 'Coiny', sans-serif;
-    font-size: 2rem;
-    color: #FF6600;
+    font-size: 2.6rem;
+    color: #FF8300;
     margin-bottom: 20px;
     z-index: 2;
-    position: relative;
-    
+    position: relative;    
+}
+
+.mapa-header H2 {
+    margin-left: 20px;
+    margin-right: 40px;
 }
 
 .mapa-header   {
@@ -732,45 +720,45 @@ body, html {
 
 .mapa-footer {
     font-family: 'Coiny', sans-serif;
-    font-size: 1.5rem;
-    color: #FF6600;
+    font-size: 2.6rem;
+    color: #FF8300;
+    margin-bottom: 20px;
+    z-index: 2;
+    position: relative;  
     margin-top: 20px;
     text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 40px;
 }
 
-/* Fim da Section Mapa */
+.mapa-footer H2 {
+    margin-left: 20px;
+    margin-right: 40px;
+}
+/* ------------ Fim da Section Mapa ------------------------------------------------- */
 
-
-/* Inicio da Transicao da Section Video */
-
-
-.wave-transition {
+/* ------------ Inicio da Transicao da Section Video -------------------------------- */
+.transition-mapa-video {
     position: relative;
     width: 100%;
     height: auto;
     line-height: 0;
+    margin-bottom: -5px;
 }
 
-.wave-transition svg {
+.transition-mapa-video svg {
     display: block;
     width: 100%; /* Faz o SVG ocupar toda a largura */
     height: auto; /* Ajusta proporcionalmente */
 }
-
-
-/* Fim da Transicao Video */
+/* ------------ Fim da Transicao Video --------------------------------------------- */
 
 
 
-/* Inicio Section Video */
-
+/* ------------ Inicio Section Video ------------ */
 .video-section {
-    background-color: #FFD700; /* Fundo amarelo */
+    background-color: #FFD509; /* Fundo amarelo */
     padding: 50px 20px;
     display: flex;
     justify-content: center;
@@ -819,13 +807,13 @@ body, html {
 }
 
 
-/* Fim da Section Video */
+/* ------------ Fim da Section Video ------------ */
 
 
 
-/* Inicio da Transicao com Familia */
+/* ------------ Inicio da Transicao com Familia ------------ */
 
-.wave-transition-family {
+.transition-video-familia {
     position: relative;
     width: 100%;
     height: auto;
@@ -833,21 +821,21 @@ body, html {
     background-color: #FFD700; /* Fundo amarelo */
 }
 
-.wave-transition-family svg {
+.transition-video-familia svg {
     display: block;
     width: 100%;
     height: auto;
 }
 
 
-/* Fim da Transicao com Familia */
+/* ------------ Fim da Transicao com Familia ------------ */
 
 
 
 
-/* Inicio da Section Familia */
+/* ------------ Inicio da Section Familia ------------ */
 
-/* Estilo da seção Família */
+/* ------------ Estilo da seção Família ------------ */
 .familia-section {
     background-color: #ffffff; /* Fundo branco */
     text-align: center;
