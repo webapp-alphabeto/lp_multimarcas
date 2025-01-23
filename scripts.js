@@ -36,4 +36,15 @@ indicators.forEach((indicator, index) => {
 });
 
 
+document.querySelectorAll('.expandable').forEach(header => {
+    header.addEventListener('click', () => {
+      const list = header.nextElementSibling;
+      const isOpen = list.style.display === 'block';
+      list.style.display = isOpen ? 'none' : 'block';
+      header.querySelector('span').textContent = isOpen ? '+' : '-';
+    });
+  });
+  
+
+
 
