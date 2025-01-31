@@ -57,6 +57,7 @@ body, html {
 
 .navbar nav {
     display: flex; /* Garante que os links fiquem em linha */
+    margin-left: 10px;
 }
 
 .nav-links {
@@ -108,19 +109,23 @@ body, html {
 /* Ajusta o container principal */
 .form-section {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Garante que os elementos não quebrem */
     justify-content: center;
     align-items: center;
     background-color: #ff8300;
     color: #ffffff;
-    padding: 0px; /* Remove o padding interno */
-    height: auto; /* Altura total da janela */
-    width: 100vw; /* Largura total da janela */
+    height: 93vh; /* Altura total da viewport */
+    width: 100vw; /* Largura total da viewport */
+    margin: 0; /* Remove margens extras */
+    padding: 0; /* Remove paddings extras */
+    box-sizing: border-box; /* Inclui bordas no cálculo de altura */
+    overflow: hidden; /* Remove possíveis barras de rolagem */
 }
+
 
 /* Ajustes do Carrosel */
 .carousel-container {
-    flex: 0 0 55%; /* 55% da largura */
+    flex: 0 0 60%; /* 55% da largura */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -205,7 +210,7 @@ body, html {
 }
 
 .form-content {
-    flex: 0 0 45%; /* 45% da largura */
+    flex: 0 0 40%; /* 45% da largura */
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -223,9 +228,9 @@ body, html {
     text-align: center; /* Centraliza o texto */
     color: #fff; /* Define a cor do texto principal */
     font-family: 'Coiny', sans-serif; /* Aplica a fonte Coiny */
-    font-size: 32px; /* Tamanho da fonte geral */
     line-height: 1; /* Altura da linha para dar espaço ao texto */
     margin-bottom: 0px; /* Espaço abaixo do título */
+    font-size: 1.5rem; /* Diminui o tamanho do título */
 }
 
 .titulo-forms2 {
@@ -247,43 +252,44 @@ body, html {
     top: 50%; /* Centraliza verticalmente */
     right: -10px; /* Posiciona à direita */
     transform: translateY(-50%); /* Ajusta o centro */
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     background: url('./img/estrelas.png') no-repeat center;
     background-size: contain;
 }
 
-.titulo-forms p {
-    margin-top: -15px; /* Ajuste este valor conforme necessário */
-}
-
-
 .titulo-img img {
-    width: 70px; /* Defina a largura desejada */
+    width: 60px; /* Defina a largura desejada */
     height: auto; /* Mantém a proporção da imagem */
     justify-content: space-between;
-    margin-right: 3px;
+    margin-right: 8px;
 }
 
 /* o Formulario */
 .formulario {
     padding: 10px;
     margin-right: 10px;
-    margin-bottom: px;
-    margin-top: 0px;
 }
 
 .formulario input, textarea {
     width: 100%;
-    padding: 5px;
-    margin-bottom: 15px;
+    padding: 6px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Ajusta o tamanho do texto */
+    padding-left: 10px;
 }
+
+
+input::placeholder, textarea::placeholder {
+    color: #ff8300; /* Altere para a cor desejada */
+    opacity: 1; /* Certifique-se de que a opacidade esteja no máximo */
+    font-style: 'Inter', Arial ; /* Opcional: estilo do texto */
+}
+
 
 .formulario label {
     font-size: 1rem;
-    margin-bottom: 5px;
 }
 
 .form-content form {
@@ -295,24 +301,22 @@ body, html {
     display: flex; /* Ativa o Flexbox */
     flex-direction: column; /* Empilha os itens verticalmente */
     align-items: flex-start; /* Alinha os itens à esquerda */
-    margin-top: 20px; /* Adiciona espaço acima do contêiner */
     width: 100%; /* Garante que o contêiner ocupe toda a largura */
 }
 
 .checkbox-container {
     display: flex;
     align-items: center; /* Alinha o checkbox com o texto */
-    margin-bottom: 20px;
 }
 
 .checkbox-container label {
-    font-size: 13px; /* Tamanho do texto do checkbox */
+    font-size: 11px; /* Tamanho do texto do checkbox */
 }
 
 .checkbox-container input[type="checkbox"] {
-    width: 20px; /* Define a largura do checkbox */
-    height: 20px; /* Define a altura do checkbox */
-    margin-right: 10px; /* Espaço entre o checkbox e o texto */
+    width: 15px; /* Define a largura do checkbox */
+    height: 15px; /* Define a altura do checkbox */
+    margin-right: 5px; /* Espaço entre o checkbox e o texto */
     appearance: none; /* Remove o estilo padrão do navegador */
     border: 2px solid #fff; /* Borda branca */
     background-color: #ffffff; /* Fundo transparente */
@@ -323,6 +327,7 @@ body, html {
     background-color: #FFD700; /* Fundo amarelo quando marcado */
     border-color: #FFD700; /* Borda amarela quando marcado */
     display: flex;
+    margin-bottom: 3px;
     align-items: center;
     justify-content: center;
 }
@@ -345,15 +350,16 @@ body, html {
     background-color: #FFD700; /* Fundo amarelo */
     color: #FF6600; /* Texto laranja */
     border: none; /* Remove borda */
-    padding: 10px 40px; /* Espaçamento interno */
+    padding: 8px 20px; /* Espaçamento interno */
     border-radius: 30px; /* Deixa o botão arredondado */
-    font-size: 1.2rem; /* Aumenta o tamanho do texto */
     font-weight: bold; /* Negrito */
     text-transform: lowercase; /* Deixa o texto em minúsculas */
     cursor: pointer; /* Mostra o ponteiro ao passar o mouse */
     transition: all 0.3s ease; /* Transição suave */
     width: auto; /* Adapta-se ao conteúdo */
     max-width: 200px; /* Define um limite máximo para o tamanho do botão */
+    padding: 8px 20px; /* Reduz o tamanho do botão */
+    font-size: 0.9rem;
 }
 
 .submit-btn:hover {
@@ -781,7 +787,7 @@ body, html {
 /* ------------ Inicio Section Video ------------ */
 .video-section {
     background-color: #FFD509; /* Fundo amarelo */
-    padding: 50px 20px;
+    padding: 30px 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -789,8 +795,8 @@ body, html {
 
 .video-container {
     position: relative;
-    width: 80%; /* Largura do vídeo */
-    max-width: 800px;
+    width: 90%; /* Largura do vídeo */
+    max-width: 1200px;
     height: auto;
     aspect-ratio: 16/9; /* Proporção do vídeo */
     overflow: hidden;
@@ -798,7 +804,6 @@ body, html {
     background-color: #fff; /* Fundo branco para o vídeo */
     border: 8px solid #FFFFFF; /* Borda branca ao redor do vídeo */
     align-items: center;
-    margin-bottom: 20px;
     
 }
 
@@ -924,7 +929,6 @@ body, html {
 .footer-transition {
     position: relative;
     width: 100%;
-    overflow: hidden;
     background-color: #Ffffff; /* Cor de fundo para complementar */
     line-height: 0;
 }

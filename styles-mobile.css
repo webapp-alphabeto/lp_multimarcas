@@ -41,7 +41,7 @@ body, html {
     align-items: center; /* Alinha verticalmente ao centro */
     justify-content: space-between; /* Garante que os elementos tenham espaço entre eles */
     position: relative; /* Necessário para usar o centramento absoluto no logo */
-    min-height: 20px;
+    min-height: 40px;
 }
 
 .logo-header {
@@ -55,7 +55,38 @@ body, html {
     align-items: center; /* Garante que os itens estejam centralizados verticalmente */
 }
 
+.navbar nav {
+    display: flex; /* Garante que os links fiquem em linha */
+    margin-left: 10px;
+}
 
+.nav-links {
+    list-style: none; /* Remove os marcadores da lista */
+    display: flex; /* Coloca os itens da lista em linha */
+    gap: 15px; /* Adiciona espaço entre os itens */
+    padding: 0; /* Remove o preenchimento padrão do <ul> */
+    margin: 0; /* Remove a margem padrão do <ul> */
+}
+
+.nav-links li a {
+    font-family: 'Poppins', 'Quicksand', 'Futura',  Arial, sans-serif; /* Usa Futura e fontes alternativas */
+    font-size: 1rem; /* Ajuste o tamanho da fonte conforme necessário */
+    font-weight: bold; /* Caso precise de um estilo negrito */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    color: #333; /* Define a cor dos links */
+    font-weight: 500; /* Estilo da fonte */
+}
+
+.nav-links li a:hover {
+    color: #ff8300; /* Altere a cor ao passar o mouse */
+}
+
+.icon-svg {
+    width: 20px; /* Aumente a largura */
+    height: 20px; /* Aumente a altura */
+}
+
+ 
 .logo-header {
     font-size: 1.6rem;
     font-weight: 700;
@@ -65,8 +96,18 @@ body, html {
 }
 
 .logoalpha {
-    width: 150px;
+    width: 200px;
     height: auto; /* Garante proporção */
+}
+
+.logo-header a {
+    text-decoration: none; /* Remove sublinhado */
+    display: inline-block; /* Garante que o link respeite o tamanho da imagem */
+}
+
+.nav-links i {
+    color: #ff8300; /* Cor do ícone */
+    font-size: 1.2rem; /* Tamanho do ícone */
 }
 
 
@@ -338,7 +379,8 @@ body, html {
     align-items: center; /* Centraliza verticalmente */
     gap: 10px; /* Espaçamento entre texto e imagem */
     flex-wrap: wrap; /* Ajusta o conteúdo em telas menores */
-    margin-top: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .logoalpha-passos {
@@ -361,6 +403,7 @@ body, html {
     align-items: center; /* Centraliza os elementos no eixo horizontal */
     gap: 10px; /* Espaço entre os passos */
     width: 100%; /* Garante que ocupe toda a largura */
+    margin-top: 40px;
 }
 
 .passo1, .passo2, .passo3 {
@@ -379,9 +422,9 @@ body, html {
 
 .icone-passo img {
     position: absolute;
-    top: -80px;
-    left: -50px;
-    width: 180px;
+    top: -60px;
+    left: -30px;
+    width: 150px;
     height: auto;
 }
 
@@ -461,17 +504,21 @@ body, html {
     column-gap: 80px; /* Espaço horizontal entre os itens */
     max-width: 800px; /* Limita a largura total */
     margin: 0 auto; /* Centraliza o container */
+    justify-content: center;
 }
 
 /* Estilo dos Itens */
 .vantagem-item {
+    width: 70%;
+    max-width: 600px;
     border-radius: 50px; /* Cantos arredondados */
     border: 3px dashed #ffffff; /* Borda tracejada */
     display: flex; /* Ativa o Flexbox */
     align-items: center; /* Alinha verticalmente ícones e texto */
     gap: 20px; /* Espaço entre o ícone e o texto */
-    padding: 20px;
+    padding: 30px;
     text-align: left; /* Alinha o texto à esquerda */
+    margin: 0 auto; 
 }
 
 /* Estilo do SVG */
@@ -748,7 +795,7 @@ body, html {
 /* ------------ Inicio Section Video ------------ */
 .video-section {
     background-color: #FFD509; /* Fundo amarelo */
-    padding: 50px 20px;
+    padding: 40px 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -756,7 +803,7 @@ body, html {
 
 .video-container {
     position: relative;
-    width: 80%; /* Largura do vídeo */
+    width: 90%; /* Largura do vídeo */
     max-width: 800px;
     height: auto;
     aspect-ratio: 16/9; /* Proporção do vídeo */
