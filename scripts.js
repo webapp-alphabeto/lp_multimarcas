@@ -44,6 +44,7 @@ document.querySelectorAll('.expandable').forEach(header => {
       header.querySelector('span').textContent = isOpen ? '+' : '-';
     });
   });
+  
   document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector(".form");
     const ufSelect = document.querySelector("#uf");
@@ -199,7 +200,7 @@ async function carregarCidades(uf) {
 
 // Função para enviar os dados para a API
 async function enviarDados(payload, form) {
-    const url = "https://alphabeto.geovendas.app/IBTech_VirtualAge/rest/prospect/external";
+    const url = "https://alphabeto.geovendas.app/IBTech_Homologacao/rest/prospect/external";
 
     const headers = {
         "Content-Type": "application/json"
