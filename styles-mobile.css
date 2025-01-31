@@ -509,14 +509,14 @@ body, html {
 
 /* Estilo dos Itens */
 .vantagem-item {
-    width: 70%;
+    width: 95%;
     max-width: 600px;
     border-radius: 50px; /* Cantos arredondados */
     border: 3px dashed #ffffff; /* Borda tracejada */
     display: flex; /* Ativa o Flexbox */
     align-items: center; /* Alinha verticalmente ícones e texto */
-    gap: 20px; /* Espaço entre o ícone e o texto */
-    padding: 30px;
+    gap: 10px; /* Espaço entre o ícone e o texto */
+    padding: 20px;
     text-align: left; /* Alinha o texto à esquerda */
     margin: 0 auto; 
 }
@@ -611,9 +611,9 @@ body, html {
     font-size: 2rem;
     margin-bottom: 40px;
     margin-left: 10px;
-    margin-right: 40px;
+    margin-right: 10px;
     letter-spacing: 0.08em;
-    margin-top: -20px;
+    margin-top: -10px;
 }
 
 
