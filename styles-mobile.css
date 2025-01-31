@@ -1059,6 +1059,61 @@ body, html {
 /* Fim do Footer */
 
 
+/* Ajuste para manter todos os campos iguais */
+.form input,
+.form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Garante que o padding não afete o tamanho total */
+}
+
+/* Ajuste específico para os dropdowns (select) */
+.form select {
+    appearance: none; /* Remove o estilo padrão do sistema */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+/* Ícone de dropdown para manter o design mais uniforme */
+.form select {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+/* Correção para o checkbox */
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+}
+
+/* Botão de enviar */
+.submit-btn {
+    width: 100%;
+    background-color: #FFD700; /* Cor do botão (ajuste conforme necessário) */
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #FFC107; /* Tom mais escuro ao passar o mouse */
+}
 
 
 

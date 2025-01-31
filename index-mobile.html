@@ -82,25 +82,36 @@
                     <form action="#" method="POST" class="form">
                         <label for="name">Nome *</label>
                         <input type="text" id="name" name="name" required>
+                    
                         <label for="email">E-mail *</label>
                         <input type="email" id="email" name="email" required>
+                    
                         <label for="phone">Celular *</label>
                         <input type="tel" id="phone" name="phone" required>
+                    
                         <label for="instagram">Instagram da sua loja *</label>
                         <input type="text" id="instagram" name="instagram" placeholder="@" required>
-                        <label for="uf">UF *</label>
-                        <input type="text" id="uf" name="uf" required>
+                    
+                        <label for="uf">Estado (UF) *</label>
+                        <select id="uf" name="uf" required>
+                            <option value="">Carregando Estados...</option>
+                        </select>
+                    
                         <label for="city">Cidade que fica a sua loja física *</label>
-                        <input type="text" id="city" name="city" required>
+                        <select id="city" name="city" required disabled>
+                            <option value="">Selecione um Estado primeiro</option>
+                        </select>
+                    
                         <label for="cnpj">Qual seu CNPJ *</label>
                         <input type="text" id="cnpj" name="cnpj" required>
+                    
                         <div class="form-footer">
                             <div class="checkbox-container">
                                 <input type="checkbox" id="consent" name="consent">
                                 <label for="consent">Concorda em receber comunicações da Alphabeto sobre serviços acima.</label>
                             </div>
                             <div class="button-container">
-                                <button type="submit" class="submit-btn">enviar</button>
+                                <button type="submit" class="submit-btn">Enviar</button>
                             </div>
                         </div>
                     </form>
