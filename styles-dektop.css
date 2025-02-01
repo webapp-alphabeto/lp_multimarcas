@@ -787,7 +787,7 @@ input::placeholder, textarea::placeholder {
 /* ------------ Inicio Section Video ------------ */
 .video-section {
     background-color: #FFD509; /* Fundo amarelo */
-    padding: 30px 15px;
+    padding: 10px 10px 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -795,7 +795,7 @@ input::placeholder, textarea::placeholder {
 
 .video-container {
     position: relative;
-    width: 90%; /* Largura do vídeo */
+    width: 85%; /* Largura do vídeo */
     max-width: 1200px;
     height: auto;
     aspect-ratio: 16/9; /* Proporção do vídeo */
@@ -816,17 +816,7 @@ input::placeholder, textarea::placeholder {
     
 }
 
-
-
-.video-container,
-.video-iframe {
-    margin: 0;
-    padding: 0;
-}
-
-
 .video-overlay {
-    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -876,6 +866,8 @@ input::placeholder, textarea::placeholder {
 .familia-section {
     background-color: #ffffff; /* Fundo branco */
     text-align: center;
+    padding-bottom: 10px; /* Reduz o espaçamento inferior */
+    margin-bottom: 0; /* Remove margens extras */
 }
 
 .familia-container {
@@ -913,6 +905,7 @@ input::placeholder, textarea::placeholder {
     flex-direction: row;
     align-items: baseline;
     justify-content: center;
+    margin-bottom: 0;
 }
 
 
@@ -931,6 +924,7 @@ input::placeholder, textarea::placeholder {
     width: 100%;
     background-color: #Ffffff; /* Cor de fundo para complementar */
     line-height: 0;
+    margin-top: -20px;
 }
 
 .footer-transition svg {
