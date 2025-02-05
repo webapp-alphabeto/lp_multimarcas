@@ -35,6 +35,20 @@ indicators.forEach((indicator, index) => {
     });
 });
 
+// Adicionar rotação automática
+function startAutoSlide() {
+    setInterval(() => {
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
+    }, 3000); // 3000ms (3 segundos) entre as transições
+}
+
+// Iniciar o carrossel automaticamente ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    updateCarousel();
+    startAutoSlide();
+});
+
 
 document.querySelectorAll('.expandable').forEach(header => {
     header.addEventListener('click', () => {
