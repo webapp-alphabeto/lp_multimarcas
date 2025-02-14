@@ -60,12 +60,75 @@ document.querySelectorAll('.expandable').forEach(header => {
   });
   
   document.addEventListener("DOMContentLoaded", function () {
+    // Seleção de elementos do DOM
+    const carousel = document.querySelector(".carousel");
+    const images = document.querySelectorAll(".carousel img");
+    const prevButton = document.querySelector(".prev");
+    const nextButton = document.querySelector(".next");
+    const indicators = document.querySelectorAll(".indicator");
     const form = document.querySelector(".form");
     const ufSelect = document.querySelector("#uf");
     const citySelect = document.querySelector("#city");
     const cnpjInput = document.querySelector("#cnpj");
 
-    // Carregar Estados no Dropdown
+    let currentIndex = 0;
+
+    // Função para atualizar o carrossel
+    function updateCarousel() {
+        const offset = -currentIndex * 100;
+        carousel.style.transform = `translateX(${offset}%)`;
+        updateIndicators();
+    }
+
+    // Atualizar indicadores do carrossel
+    function updateIndicators() {
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle("active", index === currentIndex);
+        });
+    }
+
+    // Evento de clique nos botões do carrossel
+    prevButton.addEventListener("click", () => {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+        updateCarousel();
+    });
+
+    nextButton.addEventListener("click", () => {
+        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
+    });
+
+    // Evento de clique nos indicadores do carrossel
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => {
+            currentIndex = index;
+            updateCarousel();
+        });
+    });
+
+    // Adicionar rotação automática no carrossel
+    function startAutoSlide() {
+        setInterval(() => {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            updateCarousel();
+        }, 3000);
+    }
+
+    // Iniciar o carrossel automaticamente ao carregar a página
+    updateCarousel();
+    startAutoSlide();
+
+    // Configuração do menu expansível
+    document.querySelectorAll(".expandable").forEach(header => {
+        header.addEventListener("click", () => {
+            const list = header.nextElementSibling;
+            const isOpen = list.style.display === "block";
+            list.style.display = isOpen ? "none" : "block";
+            header.querySelector("span").textContent = isOpen ? "+" : "-";
+        });
+    });
+
+    // Carregar Estados no dropdown
     carregarEstados();
 
     // Quando um Estado for selecionado, carregar as cidades correspondentes
@@ -80,55 +143,56 @@ document.querySelectorAll('.expandable').forEach(header => {
         }
     });
 
-form.addEventListener("submit", async function (event) {
-    event.preventDefault();
+    // Evento de submissão do formulário
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    // Captura os valores do formulário e converte para caixa alta
-    const nome = document.querySelector("#name").value.toUpperCase();
-    const email = document.querySelector("#email").value.toUpperCase();
-    const celular = document.querySelector("#phone").value.toUpperCase();
-    const instagram = document.querySelector("#instagram").value.toUpperCase();
-    const uf = ufSelect.value.toUpperCase();
-    const cidade = citySelect.value.toUpperCase();
-    const cnpj = cnpjInput.value.toUpperCase();
+        // Captura os valores do formulário e converte para caixa alta
+        const nome = document.querySelector("#name").value.trim().toUpperCase();
+        const email = document.querySelector("#email").value.trim().toUpperCase();
+        const celular = document.querySelector("#phone").value.trim().toUpperCase();
+        const instagram = document.querySelector("#instagram").value.trim().toUpperCase();
+        const uf = ufSelect.value.trim().toUpperCase();
+        const cidade = citySelect.value.trim().toUpperCase();
+        const cnpj = cnpjInput.value.trim();
 
-    // Validação antes do envio
-    if (!nome || !email || !celular || !uf || !cidade || !cnpj) {
-        alert("Preencha todos os campos obrigatórios!");
-        return;
-    }
+        // Validação antes do envio
+        if (!nome || !email || !celular || !uf || !cidade || !cnpj) {
+            alert("Preencha todos os campos obrigatórios!");
+            return;
+        }
 
-    if (!validarCNPJ(cnpj)) {
-        alert("CNPJ inválido! Verifique e tente novamente.");
-        return;
-    }
+        if (!validarCNPJ(cnpj)) {
+            alert("CNPJ inválido! Verifique e tente novamente.");
+            return;
+        }
 
-    const codIbge = cidade;
+        const codIbge = cidade;
 
-    // Gerar token em Base64 (usuário^senha)
-    const usuario = "Alphabeto";
-    const senha = "12345";
-    const tokenBase64 = btoa(`${usuario}^${senha}`);
+        // Gerar token em Base64 (usuário^senha)
+        const usuario = "Alphabeto";
+        const senha = "12345";
+        const tokenBase64 = btoa(`${usuario}^${senha}`);
 
-    const payload = {
-        fantasia: nome,
-        email: email,
-        celular: celular,
-        instagram: instagram,
-        cidade: { codIbge: codIbge },
-        cnpj: cnpj,
-        token: tokenBase64
-    };
+        const payload = {
+            fantasia: nome,
+            email: email,
+            celular: celular,
+            instagram: instagram,
+            cidade: { codIbge: codIbge },
+            cnpj: cnpj,
+            token: tokenBase64
+        };
 
-    enviarDados(payload, form);
+        enviarDados(payload, form);
+    });
 });
 
 // Função para validar CNPJ
 function validarCNPJ(cnpj) {
-    cnpj = cnpj.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
+    cnpj = cnpj.replace(/[^\d]+/g, ""); // Remove caracteres não numéricos
 
     if (cnpj.length !== 14) return false;
-
     if (/^(\d)\1+$/.test(cnpj)) return false; // Verifica se todos os números são iguais
 
     let tamanho = cnpj.length - 2;
@@ -167,7 +231,7 @@ async function carregarEstados() {
         const ufSelect = document.querySelector("#uf");
         ufSelect.innerHTML = '<option value="">Carregando Estados...</option>';
 
-        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados`);
+        const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados");
         const data = await response.json();
 
         ufSelect.innerHTML = '<option value="">Selecione um Estado</option>';
@@ -180,7 +244,6 @@ async function carregarEstados() {
         });
 
         document.querySelector("#city").disabled = true;
-
     } catch (error) {
         console.error("Erro ao carregar Estados:", error);
         document.querySelector("#uf").innerHTML = '<option value="">Erro ao carregar</option>';
@@ -204,7 +267,6 @@ async function carregarCidades(uf) {
             option.textContent = cidade.nome;
             citySelect.appendChild(option);
         });
-
     } catch (error) {
         console.error("Erro ao carregar Cidades:", error);
         document.querySelector("#city").innerHTML = '<option value="">Erro ao carregar</option>';
@@ -215,24 +277,18 @@ async function carregarCidades(uf) {
 async function enviarDados(payload, form) {
     const url = "https://alphabeto.geovendas.app/IBTech_VirtualAge/rest/prospect/external";
 
-    const headers = {
-        "Content-Type": "application/json"
-    };
-
     try {
         const response = await fetch(url, {
             method: "POST",
-            headers: headers,
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
-
-        const respostaJson = await response.json();
 
         if (response.status === 201) {
             alert("Cadastro realizado com sucesso!");
             form.reset();
         } else {
-            alert(`Erro: ${respostaJson.message}`);
+            alert("Erro ao enviar os dados.");
         }
     } catch (error) {
         console.error("Erro ao enviar os dados:", error);
