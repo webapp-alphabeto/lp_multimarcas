@@ -80,48 +80,47 @@ document.querySelectorAll('.expandable').forEach(header => {
         }
     });
 
-    form.addEventListener("submit", async function (event) {
-        event.preventDefault();
+form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-        // Captura os valores do formulário
-        const nome = document.querySelector("#name").value;
-        const email = document.querySelector("#email").value;
-        const celular = document.querySelector("#phone").value;
-        const instagram = document.querySelector("#instagram").value;
-        const uf = ufSelect.value;
-        const cidade = citySelect.value;
-        const cnpj = cnpjInput.value;
+    // Captura os valores do formulário e converte para caixa alta
+    const nome = document.querySelector("#name").value.toUpperCase();
+    const email = document.querySelector("#email").value.toUpperCase();
+    const celular = document.querySelector("#phone").value.toUpperCase();
+    const instagram = document.querySelector("#instagram").value.toUpperCase();
+    const uf = ufSelect.value.toUpperCase();
+    const cidade = citySelect.value.toUpperCase();
+    const cnpj = cnpjInput.value.toUpperCase();
 
-        // Validação antes do envio
-        if (!nome || !email || !celular || !uf || !cidade || !cnpj) {
-            alert("Preencha todos os campos obrigatórios!");
-            return;
-        }
+    // Validação antes do envio
+    if (!nome || !email || !celular || !uf || !cidade || !cnpj) {
+        alert("Preencha todos os campos obrigatórios!");
+        return;
+    }
 
-        if (!validarCNPJ(cnpj)) {
-            alert("CNPJ inválido! Verifique e tente novamente.");
-            return;
-        }
+    if (!validarCNPJ(cnpj)) {
+        alert("CNPJ inválido! Verifique e tente novamente.");
+        return;
+    }
 
-        const codIbge = cidade;
+    const codIbge = cidade;
 
-        // Gerar token em Base64 (usuário^senha)
-        const usuario = "Alphabeto";
-        const senha = "12345";
-        const tokenBase64 = btoa(`${usuario}^${senha}`);
+    // Gerar token em Base64 (usuário^senha)
+    const usuario = "Alphabeto";
+    const senha = "12345";
+    const tokenBase64 = btoa(`${usuario}^${senha}`);
 
-        const payload = {
-            fantasia: nome,
-            email: email,
-            celular: celular,
-            instagram: instagram,
-            cidade: { codIbge: codIbge },
-            cnpj: cnpj,
-            token: tokenBase64
-        };
+    const payload = {
+        fantasia: nome,
+        email: email,
+        celular: celular,
+        instagram: instagram,
+        cidade: { codIbge: codIbge },
+        cnpj: cnpj,
+        token: tokenBase64
+    };
 
-        enviarDados(payload, form);
-    });
+    enviarDados(payload, form);
 });
 
 // Função para validar CNPJ
