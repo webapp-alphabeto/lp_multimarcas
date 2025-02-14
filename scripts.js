@@ -78,75 +78,42 @@ document.querySelectorAll('.expandable').forEach(header => {
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c").replace(/Ç/g, "C");
     }
 
-    // Função para atualizar o carrossel
-    function updateCarousel() {
-        const offset = -currentIndex * 100;
-        carousel.style.transform = `translateX(${offset}%)`;
-        updateIndicators();
-    }
+    // Função para validar CNPJ
+    function validarCNPJ(cnpj) {
+        cnpj = cnpj.replace(/[^\d]+/g, ""); // Remove caracteres não numéricos
 
-    // Atualizar indicadores do carrossel
-    function updateIndicators() {
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle("active", index === currentIndex);
-        });
-    }
+        if (cnpj.length !== 14) return false;
+        if (/^(\d)\1+$/.test(cnpj)) return false; // Verifica se todos os números são iguais
 
-    // Evento de clique nos botões do carrossel
-    prevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
-        updateCarousel();
-    });
+        let tamanho = cnpj.length - 2;
+        let numeros = cnpj.substring(0, tamanho);
+        let digitos = cnpj.substring(tamanho);
+        let soma = 0;
+        let pos = tamanho - 7;
 
-    nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-        updateCarousel();
-    });
-
-    // Evento de clique nos indicadores do carrossel
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener("click", () => {
-            currentIndex = index;
-            updateCarousel();
-        });
-    });
-
-    // Adicionar rotação automática no carrossel
-    function startAutoSlide() {
-        setInterval(() => {
-            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-            updateCarousel();
-        }, 3000);
-    }
-
-    // Iniciar o carrossel automaticamente ao carregar a página
-    updateCarousel();
-    startAutoSlide();
-
-    // Configuração do menu expansível
-    document.querySelectorAll(".expandable").forEach(header => {
-        header.addEventListener("click", () => {
-            const list = header.nextElementSibling;
-            const isOpen = list.style.display === "block";
-            list.style.display = isOpen ? "none" : "block";
-            header.querySelector("span").textContent = isOpen ? "+" : "-";
-        });
-    });
-
-    // Carregar Estados no dropdown
-    carregarEstados();
-
-    // Quando um Estado for selecionado, carregar as cidades correspondentes
-    ufSelect.addEventListener("change", async function () {
-        const uf = ufSelect.value;
-        if (uf) {
-            citySelect.disabled = false;
-            await carregarCidades(uf);
-        } else {
-            citySelect.innerHTML = '<option value="">Selecione um estado primeiro</option>';
-            citySelect.disabled = true;
+        for (let i = tamanho; i >= 1; i--) {
+            soma += numeros.charAt(tamanho - i) * pos--;
+            if (pos < 2) pos = 9;
         }
-    });
+
+        let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        if (resultado !== parseInt(digitos.charAt(0))) return false;
+
+        tamanho = tamanho + 1;
+        numeros = cnpj.substring(0, tamanho);
+        soma = 0;
+        pos = tamanho - 7;
+
+        for (let i = tamanho; i >= 1; i--) {
+            soma += numeros.charAt(tamanho - i) * pos--;
+            if (pos < 2) pos = 9;
+        }
+
+        resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+        if (resultado !== parseInt(digitos.charAt(1))) return false;
+
+        return true;
+    }
 
     // Evento de submissão do formulário
     form.addEventListener("submit", async function (event) {
@@ -191,75 +158,88 @@ document.querySelectorAll('.expandable').forEach(header => {
 
         enviarDados(payload, form);
     });
-});
 
-// Função para carregar os Estados no dropdown
-async function carregarEstados() {
-    try {
-        const ufSelect = document.querySelector("#uf");
-        ufSelect.innerHTML = '<option value="">Carregando Estados...</option>';
+    // Função para enviar os dados para a API
+    async function enviarDados(payload, form) {
+        const url = "https://alphabeto.geovendas.app/IBTech_VirtualAge/rest/prospect/external";
 
-        const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados");
-        const data = await response.json();
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
 
-        ufSelect.innerHTML = '<option value="">Selecione um Estado</option>';
-
-        data.sort((a, b) => a.nome.localeCompare(b.nome)).forEach(estado => {
-            const option = document.createElement("option");
-            option.value = estado.sigla;
-            option.textContent = estado.nome;
-            ufSelect.appendChild(option);
-        });
-
-        document.querySelector("#city").disabled = true;
-    } catch (error) {
-        console.error("Erro ao carregar Estados:", error);
-        document.querySelector("#uf").innerHTML = '<option value="">Erro ao carregar</option>';
-    }
-}
-
-// Função para carregar as Cidades do Estado selecionado
-async function carregarCidades(uf) {
-    try {
-        const citySelect = document.querySelector("#city");
-        citySelect.innerHTML = '<option value="">Carregando Cidades...</option>';
-
-        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`);
-        const data = await response.json();
-
-        citySelect.innerHTML = '<option value="">Selecione a Cidade</option>';
-
-        data.forEach(cidade => {
-            const option = document.createElement("option");
-            option.value = cidade.id; // Código IBGE da cidade
-            option.textContent = cidade.nome;
-            citySelect.appendChild(option);
-        });
-    } catch (error) {
-        console.error("Erro ao carregar Cidades:", error);
-        document.querySelector("#city").innerHTML = '<option value="">Erro ao carregar</option>';
-    }
-}
-
-// Função para enviar os dados para a API
-async function enviarDados(payload, form) {
-    const url = "https://alphabeto.geovendas.app/IBTech_VirtualAge/rest/prospect/external";
-
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.status === 201) {
-            alert("Cadastro realizado com sucesso!");
-            form.reset();
-        } else {
-            alert("Erro ao enviar os dados.");
+            if (response.status === 201) {
+                alert("Cadastro realizado com sucesso!");
+                form.reset();
+            } else {
+                alert("Erro ao enviar os dados.");
+            }
+        } catch (error) {
+            console.error("Erro ao enviar os dados:", error);
+            alert("Falha ao conectar com o servidor.");
         }
-    } catch (error) {
-        console.error("Erro ao enviar os dados:", error);
-        alert("Falha ao conectar com o servidor.");
     }
-}
+
+    // Função para carregar os Estados no dropdown
+    async function carregarEstados() {
+        try {
+            ufSelect.innerHTML = '<option value="">Carregando Estados...</option>';
+
+            const response = await fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados");
+            const data = await response.json();
+
+            ufSelect.innerHTML = '<option value="">Selecione um Estado</option>';
+
+            data.sort((a, b) => a.nome.localeCompare(b.nome)).forEach(estado => {
+                const option = document.createElement("option");
+                option.value = estado.sigla;
+                option.textContent = estado.nome;
+                ufSelect.appendChild(option);
+            });
+
+            citySelect.disabled = true;
+        } catch (error) {
+            console.error("Erro ao carregar Estados:", error);
+            ufSelect.innerHTML = '<option value="">Erro ao carregar</option>';
+        }
+    }
+
+    // Função para carregar as Cidades do Estado selecionado
+    async function carregarCidades(uf) {
+        try {
+            citySelect.innerHTML = '<option value="">Carregando Cidades...</option>';
+
+            const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`);
+            const data = await response.json();
+
+            citySelect.innerHTML = '<option value="">Selecione a Cidade</option>';
+
+            data.forEach(cidade => {
+                const option = document.createElement("option");
+                option.value = cidade.id; // Código IBGE da cidade
+                option.textContent = cidade.nome;
+                citySelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error("Erro ao carregar Cidades:", error);
+            citySelect.innerHTML = '<option value="">Erro ao carregar</option>';
+        }
+    }
+
+    // Quando um Estado for selecionado, carregar as cidades correspondentes
+    ufSelect.addEventListener("change", async function () {
+        const uf = ufSelect.value;
+        if (uf) {
+            citySelect.disabled = false;
+            await carregarCidades(uf);
+        } else {
+            citySelect.innerHTML = '<option value="">Selecione um estado primeiro</option>';
+            citySelect.disabled = true;
+        }
+    });
+
+    // Carregar estados ao iniciar
+    carregarEstados();
+});
