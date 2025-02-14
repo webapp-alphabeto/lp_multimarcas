@@ -73,6 +73,11 @@ document.querySelectorAll('.expandable').forEach(header => {
 
     let currentIndex = 0;
 
+    // Função para remover acentos e caracteres especiais
+    function removerAcentos(texto) {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c").replace(/Ç/g, "C");
+    }
+
     // Função para atualizar o carrossel
     function updateCarousel() {
         const offset = -currentIndex * 100;
@@ -147,14 +152,14 @@ document.querySelectorAll('.expandable').forEach(header => {
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        // Captura os valores do formulário e converte para caixa alta
-        const nome = document.querySelector("#name").value.trim().toUpperCase();
-        const email = document.querySelector("#email").value.trim().toUpperCase();
-        const celular = document.querySelector("#phone").value.trim().toUpperCase();
-        const instagram = document.querySelector("#instagram").value.trim().toUpperCase();
-        const uf = ufSelect.value.trim().toUpperCase();
-        const cidade = citySelect.value.trim().toUpperCase();
-        const cnpj = cnpjInput.value.trim();
+        // Captura os valores do formulário, converte para caixa alta e remove acentos
+        const nome = removerAcentos(document.querySelector("#name").value.trim().toUpperCase());
+        const email = removerAcentos(document.querySelector("#email").value.trim().toUpperCase());
+        const celular = removerAcentos(document.querySelector("#phone").value.trim().toUpperCase());
+        const instagram = removerAcentos(document.querySelector("#instagram").value.trim().toUpperCase());
+        const uf = removerAcentos(ufSelect.value.trim().toUpperCase());
+        const cidade = removerAcentos(citySelect.value.trim().toUpperCase());
+        const cnpj = removerAcentos(cnpjInput.value.trim());
 
         // Validação antes do envio
         if (!nome || !email || !celular || !uf || !cidade || !cnpj) {
@@ -187,43 +192,6 @@ document.querySelectorAll('.expandable').forEach(header => {
         enviarDados(payload, form);
     });
 });
-
-// Função para validar CNPJ
-function validarCNPJ(cnpj) {
-    cnpj = cnpj.replace(/[^\d]+/g, ""); // Remove caracteres não numéricos
-
-    if (cnpj.length !== 14) return false;
-    if (/^(\d)\1+$/.test(cnpj)) return false; // Verifica se todos os números são iguais
-
-    let tamanho = cnpj.length - 2;
-    let numeros = cnpj.substring(0, tamanho);
-    let digitos = cnpj.substring(tamanho);
-    let soma = 0;
-    let pos = tamanho - 7;
-
-    for (let i = tamanho; i >= 1; i--) {
-        soma += numeros.charAt(tamanho - i) * pos--;
-        if (pos < 2) pos = 9;
-    }
-
-    let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-    if (resultado !== parseInt(digitos.charAt(0))) return false;
-
-    tamanho = tamanho + 1;
-    numeros = cnpj.substring(0, tamanho);
-    soma = 0;
-    pos = tamanho - 7;
-
-    for (let i = tamanho; i >= 1; i--) {
-        soma += numeros.charAt(tamanho - i) * pos--;
-        if (pos < 2) pos = 9;
-    }
-
-    resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-    if (resultado !== parseInt(digitos.charAt(1))) return false;
-
-    return true;
-}
 
 // Função para carregar os Estados no dropdown
 async function carregarEstados() {
