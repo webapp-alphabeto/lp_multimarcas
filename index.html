@@ -21,10 +21,11 @@
 
     <script>
         // Detecta se a largura da tela é menor ou igual a 768px (mobile)
-        const queryString = window.location.search || "";
-        const hash = window.location.hash || "";
-        const destination = window.innerWidth <= 768 ? "index-mobile.html" : "index-desktop.html";
-        window.location.href = `${destination}${queryString}${hash}`;
+        if (window.innerWidth <= 768) {
+            window.location.href = "index-mobile.html";
+        } else {
+            window.location.href = "index-desktop.html";
+        }
     </script>
 </head>
 <body>

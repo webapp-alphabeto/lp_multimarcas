@@ -70,18 +70,12 @@ document.querySelectorAll('.expandable').forEach(header => {
     const ufSelect = document.querySelector("#uf");
     const citySelect = document.querySelector("#city");
     const cnpjInput = document.querySelector("#cnpj");
-    const faturamentoMensalSelect = document.querySelector("#faturamento_mensal");
 
     let currentIndex = 0;
 
     // Função para remover acentos e caracteres especiais
     function removerAcentos(texto) {
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c").replace(/Ç/g, "C");
-    }
-
-    function obterParametroUrl(nome) {
-        const params = new URLSearchParams(window.location.search);
-        return (params.get(nome) || "").trim();
     }
 
     // Função para validar CNPJ
@@ -133,12 +127,9 @@ document.querySelectorAll('.expandable').forEach(header => {
         const uf = removerAcentos(ufSelect.value.trim().toUpperCase());
         const cidade = removerAcentos(citySelect.value.trim().toUpperCase());
         const cnpj = removerAcentos(cnpjInput.value.trim());
-        const faturamentoMensal = faturamentoMensalSelect.value.trim();
-        const leadSource = obterParametroUrl("utm_source") || "LP Multimarcas";
-        const utmCampaign = obterParametroUrl("utm_campaign") || "SEM UTM";
 
         // Validação antes do envio
-        if (!nome || !email || !celular || !uf || !cidade || !cnpj || !faturamentoMensal) {
+        if (!nome || !email || !celular || !uf || !cidade || !cnpj) {
             alert("Preencha todos os campos obrigatórios!");
             return;
         }
@@ -160,13 +151,8 @@ document.querySelectorAll('.expandable').forEach(header => {
             email: email,
             celular: celular,
             instagram: instagram,
-            instagram_: instagram,
             cidade: { codIbge: codIbge },
             cnpj: cnpj,
-            faturamento_mensal: faturamentoMensal,
-            lead_source: leadSource,
-            loja_fisica: "Sim",
-            utm_campaign: utmCampaign,
             token: tokenBase64
         };
 
@@ -184,13 +170,11 @@ document.querySelectorAll('.expandable').forEach(header => {
                 body: JSON.stringify(payload)
             });
 
-            const data = await response.json().catch(() => null);
-
-            if (response.status === 201 && !data?.hasError) {
+            if (response.status === 201) {
                 alert("Cadastro realizado com sucesso!");
                 form.reset();
             } else {
-                alert(data?.message || "Erro ao enviar os dados.");
+                alert("Erro ao enviar os dados.");
             }
         } catch (error) {
             console.error("Erro ao enviar os dados:", error);
