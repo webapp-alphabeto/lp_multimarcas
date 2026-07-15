@@ -79,6 +79,11 @@ document.querySelectorAll('.expandable').forEach(header => {
         return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c").replace(/Ç/g, "C");
     }
 
+    function obterParametroUrl(nome) {
+        const params = new URLSearchParams(window.location.search);
+        return (params.get(nome) || "").trim();
+    }
+
     // Função para validar CNPJ
     function validarCNPJ(cnpj) {
         cnpj = cnpj.replace(/[^\d]+/g, ""); // Remove caracteres não numéricos
@@ -129,6 +134,8 @@ document.querySelectorAll('.expandable').forEach(header => {
         const cidade = removerAcentos(citySelect.value.trim().toUpperCase());
         const cnpj = removerAcentos(cnpjInput.value.trim());
         const faturamentoMensal = faturamentoMensalSelect.value.trim();
+        const leadSource = obterParametroUrl("utm_source") || "LP Multimarcas";
+        const utmCampaign = obterParametroUrl("utm_campaign") || "SEM UTM";
 
         // Validação antes do envio
         if (!nome || !email || !celular || !uf || !cidade || !cnpj || !faturamentoMensal) {
@@ -152,10 +159,14 @@ document.querySelectorAll('.expandable').forEach(header => {
             fantasia: nome,
             email: email,
             celular: celular,
+            instagram: instagram,
             instagram_: instagram,
             cidade: { codIbge: codIbge },
             cnpj: cnpj,
             faturamento_mensal: faturamentoMensal,
+            lead_source: leadSource,
+            loja_fisica: "Sim",
+            utm_campaign: utmCampaign,
             token: tokenBase64
         };
 
@@ -173,11 +184,13 @@ document.querySelectorAll('.expandable').forEach(header => {
                 body: JSON.stringify(payload)
             });
 
-            if (response.status === 201) {
+            const data = await response.json().catch(() => null);
+
+            if (response.status === 201 && !data?.hasError) {
                 alert("Cadastro realizado com sucesso!");
                 form.reset();
             } else {
-                alert("Erro ao enviar os dados.");
+                alert(data?.message || "Erro ao enviar os dados.");
             }
         } catch (error) {
             console.error("Erro ao enviar os dados:", error);

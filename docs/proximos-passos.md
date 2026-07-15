@@ -33,6 +33,26 @@ O valor selecionado é enviado no payload da API de prospect usando o campo:
 
 - `faturamento_mensal`
 
+### 2026-07-15 — Campos dinâmicos de integração
+
+Após conferência da tela de Campos de Integração do Portal GEO, o formulário passou a enviar também as keys dinâmicas cadastradas:
+
+- `faturamento_mensal`: valor selecionado no dropdown de faturamento médio;
+- `lead_source`: origem do lead, usando `utm_source` quando existir na URL ou `LP Multimarcas` como fallback;
+- `loja_fisica`: enviado como `Sim`, pois o formulário exige a cidade da loja física;
+- `utm_campaign`: campanha da URL, usando `utm_campaign` quando existir ou `SEM UTM` como fallback.
+
+O payload também passou a enviar o Instagram em duas keys:
+
+- `instagram`;
+- `instagram_`.
+
+Isso mantém compatibilidade com o campo antigo e aumenta a chance de mapeamento correto no Portal GEO/IBTech.
+
+O redirecionamento inicial de `index.html` também foi ajustado para preservar `querystring` e `hash`, evitando perda de UTMs ao mandar o usuário para `index-mobile.html` ou `index-desktop.html`.
+
+Também foi melhorado o tratamento de erro do envio: quando a API retorna uma mensagem, como duplicidade de CNPJ/e-mail, o alerta do site passa a exibir a mensagem real em vez de mostrar apenas `Erro ao enviar os dados.`.
+
 ## Hospedagem e deploy
 
 O histórico do projeto indica que ele já foi hospedado na Azure e depois migrado para Netlify.
@@ -89,6 +109,26 @@ Foram encontrados recursos locais referenciados que não existem no repositório
 - `./img/estrelas.png`.
 
 Esses recursos geram `404` quando solicitados. O site ainda pode funcionar com fallback de fonte/imagem, mas o ideal é corrigir para evitar ruído no deploy e diferenças visuais.
+
+## Teste da API de prospect
+
+### 2026-07-15 — Validação do envio com `faturamento_mensal`
+
+Foi testado um POST direto para:
+
+- `https://alphabeto.geovendas.app/IBTech_VirtualAge/rest/prospect/external`
+
+Resultado:
+
+- A API aceitou payload contendo o campo `faturamento_mensal`.
+- A resposta de sucesso foi `201` com mensagem de prospect criado.
+- Ao repetir o mesmo CNPJ/e-mail, a API respondeu `409` informando duplicidade de prospect.
+
+Conclusão:
+
+- O campo `faturamento_mensal` não quebrou a API.
+- O alerta genérico `Erro ao enviar os dados.` pode estar escondendo uma mensagem real da API, como duplicidade de CNPJ/e-mail.
+- Próxima melhoria recomendada: ajustar `scripts.js` para exibir a mensagem retornada pela API quando o status for diferente de `201`.
 
 ## Pontos de atenção
 
