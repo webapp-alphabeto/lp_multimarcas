@@ -70,6 +70,7 @@ document.querySelectorAll('.expandable').forEach(header => {
     const ufSelect = document.querySelector("#uf");
     const citySelect = document.querySelector("#city");
     const cnpjInput = document.querySelector("#cnpj");
+    const faturamentoMensalSelect = document.querySelector("#faturamento_mensal");
 
     let currentIndex = 0;
 
@@ -127,9 +128,10 @@ document.querySelectorAll('.expandable').forEach(header => {
         const uf = removerAcentos(ufSelect.value.trim().toUpperCase());
         const cidade = removerAcentos(citySelect.value.trim().toUpperCase());
         const cnpj = removerAcentos(cnpjInput.value.trim());
+        const faturamentoMensal = faturamentoMensalSelect.value.trim();
 
         // Validação antes do envio
-        if (!nome || !email || !celular || !uf || !cidade || !cnpj) {
+        if (!nome || !email || !celular || !uf || !cidade || !cnpj || !faturamentoMensal) {
             alert("Preencha todos os campos obrigatórios!");
             return;
         }
@@ -153,6 +155,7 @@ document.querySelectorAll('.expandable').forEach(header => {
             instagram_: instagram,
             cidade: { codIbge: codIbge },
             cnpj: cnpj,
+            faturamento_mensal: faturamentoMensal,
             token: tokenBase64
         };
 
