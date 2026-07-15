@@ -150,7 +150,7 @@ document.querySelectorAll('.expandable').forEach(header => {
             fantasia: nome,
             email: email,
             celular: celular,
-            instagram: instagram,
+            instagram_: instagram,
             cidade: { codIbge: codIbge },
             cnpj: cnpj,
             token: tokenBase64
