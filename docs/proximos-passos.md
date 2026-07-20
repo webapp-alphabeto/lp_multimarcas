@@ -37,11 +37,11 @@ O valor selecionado é enviado no payload da API de prospect usando o campo:
 Após conferência da tela de Campos de Integração do Portal GEO, o formulário passou a enviar também as keys dinâmicas cadastradas:
 
 - `faturamento_mensal`: valor selecionado no dropdown de faturamento médio;
-- `lead_source`: origem do lead, usando `utm_source` quando existir na URL ou `LP Multimarcas` como fallback;
+- `lead_source`: origem fixa do lead, usando `LP Multimarcas`;
 - `loja_fisica`: enviado como `Sim`, pois o formulário exige a cidade da loja física;
 - `utm_campaign`: campanha da URL, usando `utm_campaign` quando existir ou `SEM UTM` como fallback;
 - `utm_content`: conteúdo da URL, usando `utm_content` quando existir ou `SEM UTM` como fallback;
-- `utm_source`: origem da URL, usando `utm_source` quando existir ou `LP Multimarcas` como fallback.
+- `utm_source`: origem da URL, usando `utm_source` quando existir ou `SEM UTM` como fallback.
 
 O payload também passou a enviar o Instagram em duas keys:
 
@@ -128,6 +128,17 @@ Após a unificação da LP, foram ajustados dois pontos específicos no mobile:
 - o passo a passo deixou de herdar as margens laterais grandes do desktop, evitando deslocamento e corte na parte inferior da seção.
 
 Também foi reforçado no CSS que cada imagem do carrossel ocupa 100% da largura do slide, deixando a navegação por `translateX` consistente.
+
+### 2026-07-20 — Regra de UTMs patrocinadas
+
+O envio do formulário passou a tratar UTMs de forma explícita:
+
+- `utm_campaign`: usa o valor da URL quando existir, ou `SEM UTM` quando não existir;
+- `utm_content`: usa o valor da URL quando existir, ou `SEM UTM` quando não existir;
+- `utm_source`: usa o valor da URL quando existir, ou `SEM UTM` quando não existir;
+- `lead_source`: sempre envia `LP Multimarcas`.
+
+A leitura dos parâmetros da URL também passou a aceitar variações de caixa, como `utm_campaign` ou `UTM_CAMPAIGN`.
 
 ## Hospedagem e deploy
 

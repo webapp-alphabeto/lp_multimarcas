@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const citySelect = document.querySelector("#city");
     const cnpjInput = document.querySelector("#cnpj");
     const faturamentoMensalSelect = document.querySelector("#faturamento_mensal");
+    const SEM_UTM = "SEM UTM";
+    const LEAD_SOURCE_FIXA = "LP Multimarcas";
 
     let currentIndex = 0;
 
@@ -78,7 +80,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function obterParametroUrl(nome) {
         const params = new URLSearchParams(window.location.search);
-        return (params.get(nome) || "").trim();
+        const nomeNormalizado = nome.toLowerCase();
+
+        for (const [key, value] of params.entries()) {
+            if (key.toLowerCase() === nomeNormalizado) {
+                return (value || "").trim();
+            }
+        }
+
+        return "";
+    }
+
+    function obterUtmUrl(nome) {
+        return obterParametroUrl(nome) || SEM_UTM;
     }
 
     function somenteDigitos(valor) {
@@ -147,9 +161,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const cidadeNome = removerAcentos(obterTextoSelecionado(citySelect).toUpperCase());
         const cnpj = somenteDigitos(cnpjInput.value.trim());
         const faturamentoMensal = faturamentoMensalSelect.value.trim();
-        const utmSource = obterParametroUrl("utm_source") || "LP Multimarcas";
-        const utmCampaign = obterParametroUrl("utm_campaign") || "SEM UTM";
-        const utmContent = obterParametroUrl("utm_content") || "SEM UTM";
+        const utmSource = obterUtmUrl("utm_source");
+        const utmCampaign = obterUtmUrl("utm_campaign");
+        const utmContent = obterUtmUrl("utm_content");
 
         // Validação antes do envio
         if (!nome || !email || !celular || !uf || !cidade || !cnpj || !faturamentoMensal) {
@@ -187,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
             camposIntegracao: {
                 instagram_: instagram,
                 faturamento_mensal: faturamentoMensal,
-                lead_source: utmSource,
+                lead_source: LEAD_SOURCE_FIXA,
                 loja_fisica: "Sim",
                 utm_campaign: utmCampaign,
                 utm_content: utmContent,
