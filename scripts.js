@@ -1,65 +1,4 @@
-const carousel = document.querySelector('.carousel');
-const images = document.querySelectorAll('.carousel img');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
-const indicators = document.querySelectorAll('.indicator');
-
-let currentIndex = 0;
-
-function updateCarousel() {
-    const offset = -currentIndex * 100; // Move para a imagem correta
-    carousel.style.transform = `translateX(${offset}%)`;
-    updateIndicators();
-}
-
-function updateIndicators() {
-    indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === currentIndex);
-    });
-}
-
-prevButton.addEventListener('click', () => {
-    currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
-    updateCarousel();
-});
-
-nextButton.addEventListener('click', () => {
-    currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-    updateCarousel();
-});
-
-indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-        currentIndex = index;
-        updateCarousel();
-    });
-});
-
-// Adicionar rotação automática
-function startAutoSlide() {
-    setInterval(() => {
-        currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-        updateCarousel();
-    }, 3000); // 3000ms (3 segundos) entre as transições
-}
-
-// Iniciar o carrossel automaticamente ao carregar a página
-document.addEventListener('DOMContentLoaded', () => {
-    updateCarousel();
-    startAutoSlide();
-});
-
-
-document.querySelectorAll('.expandable').forEach(header => {
-    header.addEventListener('click', () => {
-      const list = header.nextElementSibling;
-      const isOpen = list.style.display === 'block';
-      list.style.display = isOpen ? 'none' : 'block';
-      header.querySelector('span').textContent = isOpen ? '+' : '-';
-    });
-  });
-  
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Seleção de elementos do DOM
     const carousel = document.querySelector(".carousel");
     const images = document.querySelectorAll(".carousel img");
@@ -73,6 +12,64 @@ document.querySelectorAll('.expandable').forEach(header => {
     const faturamentoMensalSelect = document.querySelector("#faturamento_mensal");
 
     let currentIndex = 0;
+
+    function atualizarIndicadores() {
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle("active", index === currentIndex);
+        });
+    }
+
+    function atualizarCarousel() {
+        if (!carousel || images.length === 0) return;
+
+        const offset = -currentIndex * 100;
+        carousel.style.transform = `translateX(${offset}%)`;
+        atualizarIndicadores();
+    }
+
+    function iniciarCarousel() {
+        if (!carousel || images.length === 0) return;
+
+        prevButton?.addEventListener("click", () => {
+            currentIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
+            atualizarCarousel();
+        });
+
+        nextButton?.addEventListener("click", () => {
+            currentIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+            atualizarCarousel();
+        });
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener("click", () => {
+                currentIndex = index;
+                atualizarCarousel();
+            });
+        });
+
+        atualizarCarousel();
+
+        setInterval(() => {
+            currentIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
+            atualizarCarousel();
+        }, 3000);
+    }
+
+    function iniciarFooterResponsivo() {
+        const mediaMobile = window.matchMedia("(max-width: 768px)");
+
+        document.querySelectorAll(".expandable").forEach(header => {
+            const list = header.nextElementSibling;
+            if (!list) return;
+
+            header.addEventListener("click", () => {
+                if (!mediaMobile.matches) return;
+
+                const isOpen = list.classList.toggle("is-open");
+                header.classList.toggle("is-open", isOpen);
+            });
+        });
+    }
 
     // Função para remover acentos e caracteres especiais
     function removerAcentos(texto) {
@@ -133,8 +130,11 @@ document.querySelectorAll('.expandable').forEach(header => {
         return true;
     }
 
+    iniciarCarousel();
+    iniciarFooterResponsivo();
+
     // Evento de submissão do formulário
-    form.addEventListener("submit", async function (event) {
+    form?.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         // Captura os valores do formulário, converte para caixa alta e remove acentos
@@ -270,7 +270,7 @@ document.querySelectorAll('.expandable').forEach(header => {
     }
 
     // Quando um Estado for selecionado, carregar as cidades correspondentes
-    ufSelect.addEventListener("change", async function () {
+    ufSelect?.addEventListener("change", async function () {
         const uf = ufSelect.value;
         if (uf) {
             citySelect.disabled = false;
@@ -282,5 +282,7 @@ document.querySelectorAll('.expandable').forEach(header => {
     });
 
     // Carregar estados ao iniciar
-    carregarEstados();
+    if (ufSelect && citySelect) {
+        carregarEstados();
+    }
 });

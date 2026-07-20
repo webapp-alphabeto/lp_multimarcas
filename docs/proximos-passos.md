@@ -8,12 +8,10 @@ Este repositório é uma landing page estática da Alphabeto Multimarcas. Não h
 
 Arquivos principais:
 
-- `index.html`: entrada inicial. Detecta a largura da tela e redireciona para a versão mobile ou desktop.
-- `index-mobile.html`: página mobile.
-- `index-desktop.html`: página desktop.
-- `styles-mobile.css`: estilos da versão mobile.
-- `styles-dektop.css`: estilos da versão desktop. O nome está escrito como `dektop`, e o HTML desktop usa exatamente esse nome.
+- `index.html`: página única responsiva da LP.
+- `styles.css`: estilos desktop e ajustes mobile em `@media (max-width: 768px)`.
 - `scripts.js`: carrossel, expansão de blocos, validação do formulário, carregamento de UF/cidade via IBGE e envio do prospect para a API externa.
+- `netlify/functions/receive-prospect.js`: proxy seguro da LP para o webhook CRM GEOvendas/IBTech.
 - `img/`: imagens locais usadas pela landing page.
 
 ## Alterações realizadas
@@ -51,7 +49,7 @@ O payload também passou a enviar o Instagram em duas keys:
 
 Isso mantém compatibilidade com o campo antigo e aumenta a chance de mapeamento correto no Portal GEO/IBTech.
 
-O redirecionamento inicial de `index.html` também foi ajustado para preservar `querystring` e `hash`, evitando perda de UTMs ao mandar o usuário para `index-mobile.html` ou `index-desktop.html`.
+Observação histórica: antes da unificação responsiva, o `index.html` redirecionava para páginas separadas mobile/desktop e precisou preservar `querystring` e `hash` para não perder UTMs. Esse redirecionamento foi removido em 2026-07-20.
 
 Também foi melhorado o tratamento de erro do envio: quando a API retorna uma mensagem, como duplicidade de CNPJ/e-mail, o alerta do site passa a exibir a mensagem real em vez de mostrar apenas `Erro ao enviar os dados.`. Para o endpoint novo, o front também exibe `error` quando a resposta usa esse campo em vez de `message`.
 
@@ -99,6 +97,22 @@ Novos arquivos:
 - `img/carrossel-alto-verao-26-3.jpeg`.
 
 Também foi removido um indicador excedente no carrossel mobile, que tinha 4 indicadores para 3 imagens.
+
+### 2026-07-20 — Unificação responsiva da LP
+
+A LP deixou de usar o redirecionamento por JavaScript que dividia a navegação entre `index-mobile.html` e `index-desktop.html`.
+
+Nova estrutura:
+
+- `index.html` passou a conter a página completa;
+- `styles.css` passou a concentrar o estilo desktop e os ajustes mobile dentro de `@media (max-width: 768px)`;
+- `index-mobile.html`, `index-desktop.html`, `styles-mobile.css` e `styles-dektop.css` foram removidos;
+- as UTMs agora permanecem naturalmente na URL raiz, sem depender de redirecionamento;
+- o footer mantém layout aberto no desktop e comportamento de acordeão no mobile.
+
+Também foi feita uma limpeza no `scripts.js` para evitar inicialização duplicada do carrossel e para tornar o acordeão do footer compatível com o HTML único.
+
+Durante a validação local, também foi removida a chamada CSS para `img/estrelas.png`, que já não existia no repositório e gerava `404`. A seção usa a imagem real `img/estrelas-forms-removebg-preview.png` quando necessário.
 
 ## Hospedagem e deploy
 
@@ -148,18 +162,16 @@ O envio do formulário monta um payload no modelo do webhook CRM com `cnpj_quali
 O site foi servido localmente com `python3 -m http.server` e os arquivos principais responderam:
 
 - `/`: `200 OK`;
-- `/index-mobile.html`: `200 OK`;
-- `/index-desktop.html`: `200 OK`;
+- `/styles.css`: `200 OK`;
 - `/scripts.js`: `200 OK`.
 
-Foram encontrados recursos locais referenciados que não existem no repositório:
+Ainda existem fontes locais referenciadas que não estão no repositório:
 
 - `./fonts/futura.woff2`;
 - `./fonts/futura.woff`;
-- `./fonts/futura.ttf`;
-- `./img/estrelas.png`.
+- `./fonts/futura.ttf`.
 
-Esses recursos geram `404` quando solicitados. O site ainda pode funcionar com fallback de fonte/imagem, mas o ideal é corrigir para evitar ruído no deploy e diferenças visuais.
+O site ainda pode funcionar com fallback de fonte, mas o ideal é corrigir para evitar ruído no deploy e diferenças visuais caso a fonte local seja exigida.
 
 ## Teste da API de prospect
 
@@ -188,7 +200,7 @@ Conclusão:
 3. Há referências CSS para fontes e imagem inexistentes.
 4. O arquivo `README.md` está em UTF-16 e tem conteúdo mínimo; pode ser melhor substituí-lo por uma documentação simples em UTF-8.
 5. Os HTMLs são grandes e têm SVG/base64 embutido; isso dificulta manutenção manual.
-6. O `scripts.js` contém lógica duplicada de carrossel em escopo global e dentro do `DOMContentLoaded`. Funciona no cenário atual porque o script é carregado no fim da página, mas vale limpar em uma próxima melhoria.
+6. O arquivo `styles.css` ainda carrega regras antigas herdadas das versões separadas; a LP já está unificada, mas uma refatoração futura pode reduzir bastante o CSS.
 
 ## Próximos passos recomendados
 
@@ -211,8 +223,7 @@ Conclusão:
 
 4. Corrigir recursos ausentes:
    - adicionar os arquivos da fonte Futura em `fonts/`, se a marca exigir essa fonte local;
-   - ou remover o `@font-face` e usar apenas fontes externas/fallback;
-   - adicionar `img/estrelas.png` ou ajustar o CSS para usar a imagem existente correta.
+   - ou remover o `@font-face` e usar apenas fontes externas/fallback.
 
 5. Atualizar o `README.md` para UTF-8 com:
    - descrição do projeto;
@@ -222,7 +233,7 @@ Conclusão:
    - cuidados antes de publicar.
 
 6. Fazer uma validação visual em mobile e desktop depois de qualquer ajuste, conferindo:
-   - redirecionamento inicial;
+   - layout responsivo da raiz `/`;
    - carrossel;
    - formulário;
    - carregamento de UF/cidade;
