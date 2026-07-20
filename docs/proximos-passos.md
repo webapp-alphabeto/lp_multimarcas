@@ -140,6 +140,17 @@ O envio do formulário passou a tratar UTMs de forma explícita:
 
 A leitura dos parâmetros da URL também passou a aceitar variações de caixa, como `utm_campaign` ou `UTM_CAMPAIGN`.
 
+### 2026-07-20 — Ajuste responsivo do carrossel desktop
+
+O carrossel desktop foi ajustado para reduzir diferenças visuais entre computadores e monitores:
+
+- a seção inicial deixou de depender de uma altura fixa com corte rígido;
+- o carrossel passou a respeitar a proporção real das imagens `1414 / 950`;
+- foi definido limite máximo de largura para evitar banners grandes demais em telas ultrawide;
+- o bloco carrossel + formulário passou a ter largura máxima e centralização no desktop;
+- o formulário também ganhou largura máxima para não abrir demais em monitores grandes;
+- as imagens passaram a usar `object-fit: contain` no desktop, mantendo o banner inteiro visível em vez de cortar áreas diferentes conforme a resolução.
+
 ## Hospedagem e deploy
 
 O histórico do projeto indica que ele já foi hospedado na Azure e depois migrado para Netlify.

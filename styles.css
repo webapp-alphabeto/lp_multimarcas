@@ -114,23 +114,26 @@ body, html {
     align-items: center;
     background-color: #ff8300;
     color: #ffffff;
-    height: 93vh; /* Altura total da viewport */
-    width: 100vw; /* Largura total da viewport */
+    min-height: 93vh; /* Altura mínima da área inicial */
+    height: auto;
+    width: 100%; /* Largura total da viewport sem risco de barra horizontal */
     margin: 0; /* Remove margens extras */
-    padding: 0; /* Remove paddings extras */
+    padding: clamp(16px, 2vw, 32px) clamp(16px, 2.5vw, 48px); /* Respiro responsivo para desktop */
     box-sizing: border-box; /* Inclui bordas no cálculo de altura */
-    overflow: hidden; /* Remove possíveis barras de rolagem */
+    overflow: visible;
 }
 
 
 /* Ajustes do Carrosel */
 .carousel-container {
-    flex: 0 0 60%; /* 55% da largura */
+    flex: 1 1 62%; /* Permite variar sem distorcer a proporção */
+    align-self: center;
+    aspect-ratio: 1414 / 950;
+    max-width: 1180px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -139,6 +142,9 @@ body, html {
 
 .carousel {
     display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     transition: transform 0.5s ease-in-out;
 }
 
@@ -147,7 +153,9 @@ body, html {
     min-width: 100%;
     width: 100%; /* A largura ocupa 100% da div */
     height: 100%; /* A altura ocupa 100% da div */
-    object-fit: cover; /* A imagem cobre a área, cortando o excesso */
+    object-fit: contain; /* Mantém o banner inteiro visível em desktops diferentes */
+    object-position: center;
+    background-color: #ff8300;
     border-radius: 0; /* Remova bordas arredondadas, se existirem */
     display: block;
 }
@@ -208,12 +216,19 @@ body, html {
 .form-container {
     display: flex;
     width: 100%; /* Largura total */
-    max-width: 100%; /* Remove limite de largura */
-    height: 100%;
+    max-width: 1780px; /* Mantém desktop e ultrawide consistentes */
+    min-height: inherit;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 2vw, 40px);
+    margin: 0 auto;
 }
 
 .form-content {
-    flex: 0 0 40%; /* 45% da largura */
+    flex: 0 1 clamp(340px, 32vw, 560px);
+    max-width: 560px;
+    min-width: 340px;
     padding: 6px;
     display: flex;
     flex-direction: column;
@@ -2278,12 +2293,23 @@ body, html {
     }
 
     .form-container {
+        gap: 0;
         height: auto;
+        max-width: 100%;
+        padding-inline: 0;
+        width: 100%;
     }
 
     .carousel-container {
         flex: 0 0 auto;
         margin-bottom: 0;
+        width: 100%;
+    }
+
+    .form-content {
+        flex: 0 0 auto;
+        max-width: 100%;
+        min-width: 0;
         width: 100%;
     }
 
