@@ -120,6 +120,15 @@ Foi criado o arquivo `_redirects` para preservar compatibilidade com links antig
 
 Durante a validação local, também foi removida a chamada CSS para `img/estrelas.png`, que já não existia no repositório e gerava `404`. A seção usa a imagem real `img/estrelas-forms-removebg-preview.png` quando necessário.
 
+### 2026-07-20 — Correção mobile após unificação
+
+Após a unificação da LP, foram ajustados dois pontos específicos no mobile:
+
+- o carrossel deixou de herdar `height: 93vh` e `overflow: hidden` do desktop, evitando que a imagem começasse cortada/acima da tela;
+- o passo a passo deixou de herdar as margens laterais grandes do desktop, evitando deslocamento e corte na parte inferior da seção.
+
+Também foi reforçado no CSS que cada imagem do carrossel ocupa 100% da largura do slide, deixando a navegação por `translateX` consistente.
+
 ## Hospedagem e deploy
 
 O histórico do projeto indica que ele já foi hospedado na Azure e depois migrado para Netlify.

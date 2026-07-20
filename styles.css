@@ -143,10 +143,13 @@ body, html {
 }
 
 .carousel img {
+    flex: 0 0 100%;
+    min-width: 100%;
     width: 100%; /* A largura ocupa 100% da div */
     height: 100%; /* A altura ocupa 100% da div */
     object-fit: cover; /* A imagem cobre a área, cortando o excesso */
     border-radius: 0; /* Remova bordas arredondadas, se existirem */
+    display: block;
 }
 
 .carousel-controls {
@@ -2263,6 +2266,62 @@ body, html {
 
     .titulo-forms::after {
         content: none;
+    }
+
+    .form-section {
+        align-items: stretch;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+        width: 100%;
+    }
+
+    .form-container {
+        height: auto;
+    }
+
+    .carousel-container {
+        flex: 0 0 auto;
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .carousel {
+        width: 100%;
+    }
+
+    .carousel img {
+        display: block;
+        flex: 0 0 100%;
+        height: auto;
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .passos {
+        overflow: visible;
+        padding-bottom: 0;
+    }
+
+    .passos-conteudo {
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 100%;
+        padding-bottom: 20px;
+        width: 100%;
+    }
+
+    .passo1,
+    .passo2,
+    .passo3 {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .curva-passos-vantagens {
+        margin-bottom: -1px;
+        margin-top: 0;
     }
 
     .footer-column .footer-list {
