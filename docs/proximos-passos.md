@@ -88,6 +88,18 @@ A Function encaminha o payload para o endpoint novo da GEOvendas/IBTech usando `
 
 Antes de publicar em produção, configurar essa variável no painel do Netlify com a chave correta fornecida pela IBTech.
 
+### 2026-07-20 — Troca das imagens do carrossel
+
+As imagens do carrossel mobile e desktop foram trocadas para arquivos locais da campanha `Lançamento Alto Verão 26`.
+
+Novos arquivos:
+
+- `img/carrossel-alto-verao-26-1.jpeg`;
+- `img/carrossel-alto-verao-26-2.jpeg`;
+- `img/carrossel-alto-verao-26-3.jpeg`.
+
+Também foi removido um indicador excedente no carrossel mobile, que tinha 4 indicadores para 3 imagens.
+
 ## Hospedagem e deploy
 
 O histórico do projeto indica que ele já foi hospedado na Azure e depois migrado para Netlify.
