@@ -12,6 +12,7 @@ Arquivos principais:
 - `styles.css`: estilos desktop e ajustes mobile em `@media (max-width: 768px)`.
 - `scripts.js`: carrossel, expansão de blocos, validação do formulário, carregamento de UF/cidade via IBGE e envio do prospect para a API externa.
 - `netlify/functions/receive-prospect.js`: proxy seguro da LP para o webhook CRM GEOvendas/IBTech.
+- `_redirects`: redirects legados do Netlify para mandar URLs antigas da divisão mobile/desktop de volta para `/`.
 - `img/`: imagens locais usadas pela landing page.
 
 ## Alterações realizadas
@@ -112,6 +113,11 @@ Nova estrutura:
 
 Também foi feita uma limpeza no `scripts.js` para evitar inicialização duplicada do carrossel e para tornar o acordeão do footer compatível com o HTML único.
 
+Foi criado o arquivo `_redirects` para preservar compatibilidade com links antigos:
+
+- `/index-mobile.html` redireciona para `/`;
+- `/index-desktop.html` redireciona para `/`.
+
 Durante a validação local, também foi removida a chamada CSS para `img/estrelas.png`, que já não existia no repositório e gerava `404`. A seção usa a imagem real `img/estrelas-forms-removebg-preview.png` quando necessário.
 
 ## Hospedagem e deploy
@@ -131,7 +137,8 @@ Há configuração Netlify versionada para Functions:
 Ainda não há configuração versionada completa de build/deploy:
 
 - Não existe pasta `.netlify/`.
-- Não existem arquivos `_redirects` ou `_headers`.
+- Não existe arquivo `_headers`.
+- Existe `_redirects` apenas para compatibilidade das URLs antigas `index-mobile.html` e `index-desktop.html`.
 
 Com isso, a configuração de build/publish do Netlify provavelmente continua feita diretamente no painel do Netlify, conectado ao GitHub, usando:
 
