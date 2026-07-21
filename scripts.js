@@ -12,8 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const faturamentoMensalSelect = document.querySelector("#faturamento_mensal");
     const SEM_UTM = "SEM UTM";
     const LEAD_SOURCE_FIXA = "LP Multimarcas";
+    const cadastroErroModal = document.querySelector("#cadastro-erro-modal");
+    const cadastroErroModalClose = cadastroErroModal?.querySelector("[data-modal-close]");
+    const cadastroErroWhatsapp = cadastroErroModal?.querySelector(".lead-error-modal__whatsapp");
 
     let currentIndex = 0;
+    let ultimoElementoFocado = null;
 
     function atualizarIndicadores() {
         indicators.forEach((indicator, index) => {
@@ -107,6 +111,26 @@ document.addEventListener("DOMContentLoaded", function () {
         return select.options[select.selectedIndex]?.textContent?.trim() || "";
     }
 
+    function abrirModalErroCadastro() {
+        if (!cadastroErroModal) {
+            alert("Você já possui um cadastro conosco!\n\nClique no WhatsApp para falar com nossa equipe.");
+            return;
+        }
+
+        ultimoElementoFocado = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        cadastroErroModal.hidden = false;
+        document.body.classList.add("modal-open");
+        cadastroErroWhatsapp?.focus();
+    }
+
+    function fecharModalErroCadastro() {
+        if (!cadastroErroModal) return;
+
+        cadastroErroModal.hidden = true;
+        document.body.classList.remove("modal-open");
+        ultimoElementoFocado?.focus?.();
+    }
+
     // Função para validar CNPJ
     function validarCNPJ(cnpj) {
         cnpj = cnpj.replace(/[^\d]+/g, ""); // Remove caracteres não numéricos
@@ -146,6 +170,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     iniciarCarousel();
     iniciarFooterResponsivo();
+
+    cadastroErroModalClose?.addEventListener("click", fecharModalErroCadastro);
+
+    cadastroErroModal?.addEventListener("click", function (event) {
+        if (event.target === cadastroErroModal) {
+            fecharModalErroCadastro();
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && cadastroErroModal && !cadastroErroModal.hidden) {
+            fecharModalErroCadastro();
+        }
+    });
 
     // Evento de submissão do formulário
     form?.addEventListener("submit", async function (event) {
@@ -229,11 +267,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Cadastro realizado com sucesso!");
                 form.reset();
             } else {
-                alert(data?.message || data?.error || "Erro ao enviar os dados.");
+                abrirModalErroCadastro();
             }
         } catch (error) {
             console.error("Erro ao enviar os dados:", error);
-            alert("Falha ao conectar com o servidor.");
+            abrirModalErroCadastro();
         }
     }
 

@@ -140,6 +140,18 @@ O envio do formulário passou a tratar UTMs de forma explícita:
 
 A leitura dos parâmetros da URL também passou a aceitar variações de caixa, como `utm_campaign` ou `UTM_CAMPAIGN`.
 
+### 2026-07-21 — Modal de erro no envio do cadastro
+
+Os erros retornados durante o envio do formulário para a integração deixaram de exibir o alerta genérico do navegador. Agora, qualquer erro de resposta da integração ou falha de conexão abre um modal com a mensagem fixa:
+
+> Você já possui um cadastro conosco!
+>
+> Clique no WhatsApp para falar com nossa equipe.
+
+O modal possui botão direcionando para o WhatsApp `32 9845-3823`, usando o link `https://wa.me/553298453823`.
+
+As validações feitas antes do envio, como campos obrigatórios e CNPJ inválido, continuam exibindo os alertas próprios, porque ainda não são erros retornados pela integração.
+
 ### 2026-07-20 — Ajuste responsivo do carrossel desktop
 
 O carrossel desktop foi ajustado para reduzir diferenças visuais entre computadores e monitores:
