@@ -311,3 +311,9 @@ Conclusão:
 - Os três banners da campanha `Alto Verão 26` foram substituídos pelas artes `Meu melhor amigo — Inverno 27`, mantendo a ordem fornecida pelo time.
 - As imagens recebidas em PNG foram otimizadas para JPEG em qualidade alta, preservando as dimensões originais de `1414×950` e reduzindo o peso total carregado pela LP.
 - Os textos alternativos do carrossel foram atualizados para identificar a campanha `Meu melhor amigo — Inverno 27`.
+
+### Correção da rotação
+
+- O trilho `.carousel` mantinha `overflow: hidden`, fazendo com que apenas a primeira imagem existisse dentro da área visível antes da aplicação do deslocamento.
+- O recorte passou a ficar exclusivamente em `.carousel-container`; o trilho usa `overflow: visible` e pode ser deslocado para exibir os banners 2 e 3.
+- Controles e indicadores receberam camada explícita para permanecerem clicáveis sobre todos os banners.
