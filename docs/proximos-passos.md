@@ -289,3 +289,25 @@ Conclusão:
    - carregamento de UF/cidade;
    - envio para API externa;
    - eventos do Google Tag Manager, se aplicável.
+
+## 2026-09-03 — Diagnóstico do envio em produção
+
+- O repositório local está conectado a `webapp-alphabeto/lp_multimarcas` e o branch `main` local/remoto aponta para o commit `2149f4a`.
+- Foi realizado um envio controlado pela função publicada em `https://multimarcas.alphabeto.com/.netlify/functions/receive-prospect`.
+- A função respondeu HTTP `500` com a mensagem: `Configuração pendente: GEOVENDAS_WEBHOOK_AUTH_KEY não foi definida no Netlify.`
+- O cadastro não chegou a ser encaminhado ao webhook da GEOvendas/IBTech, pois a função interrompe o fluxo quando a variável não existe.
+- O modal atual exibe a mensagem de cadastro existente para qualquer erro de envio, inclusive falhas de configuração. Próximo passo: configurar a variável no Netlify e, depois, diferenciar erros técnicos de uma resposta real de duplicidade.
+
+### Resolução
+
+- As duas chaves fornecidas foram validadas diretamente no webhook com payloads controlados; ambas responderam HTTP `200` e geraram os prospects de teste `7156` e `7157`.
+- A primeira chave validada foi configurada no Netlify como `GEOVENDAS_WEBHOOK_AUTH_KEY`, sem versionar seu valor no repositório.
+- Um novo build de produção foi disparado e concluído com estado `ready`.
+- O teste final pela Function publicada retornou HTTP `200` e `prospectId: 7158`, confirmando o fluxo Netlify → GEOvendas/IBTech com Instagram, faturamento mensal e UTMs.
+- O fluxo também foi validado diretamente no formulário visual de `https://multimarcas.alphabeto.com`, com UTMs na URL. Um CNPJ público de exemplo exibiu corretamente o modal de cadastro existente; ao repetir com um CNPJ válido e exclusivo do teste, a página exibiu o alerta de sucesso e limpou todos os campos do formulário.
+
+## 2026-10-15 — Atualização dos banners do carrossel
+
+- Os três banners da campanha `Alto Verão 26` foram substituídos pelas artes `Meu melhor amigo — Inverno 27`, mantendo a ordem fornecida pelo time.
+- As imagens recebidas em PNG foram otimizadas para JPEG em qualidade alta, preservando as dimensões originais de `1414×950` e reduzindo o peso total carregado pela LP.
+- Os textos alternativos do carrossel foram atualizados para identificar a campanha `Meu melhor amigo — Inverno 27`.
